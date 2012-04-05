@@ -64,12 +64,6 @@ filetype plugin on
 filetype plugin indent on
 set ofu=syntaxcomplete#Complete
 
-" Windows Compatible
-" On Windows, also use '.vim' instead of 'vimfiles'
-if has('win32') || has('win64')
-    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-endif
-
 " gVim options
 if has("gui_running") " Options for when GUI is present (gVim)
   set guioptions-=r " Remove right scrollbar
