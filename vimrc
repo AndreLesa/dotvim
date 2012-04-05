@@ -115,7 +115,7 @@ let g:yankstack_map_keys = 0 " No default mapping for yankstack
 call yankstack#setup() " Setup yankstack plugin
 
 " More speed!
-nnoremap ; :
+"nnoremap ; :
 inoremap jj <esc>
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
