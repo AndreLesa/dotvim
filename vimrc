@@ -166,8 +166,8 @@ nnoremap <leader>b :silent CommandTBuffer<cr>
 " Open buffer explorer
 "nnoremap <leader>b :silent BufExplorer<cr>
 
-" Maps autocomplete to tab
-imap <Tab> <C-P>
+" Map Control-Space to omnicompletion
+inoremap <C-space> <C-x><C-o>
 
 " Format selected text or paragraph with Q
 "vmap Q gq
@@ -193,7 +193,7 @@ runtime macros/matchit.vim " Extended % pairs matching
 autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal nosmartindent
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Autocomplete for Javascript
 autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
