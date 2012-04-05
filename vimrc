@@ -73,6 +73,7 @@ if has("gui_running") " Options for when GUI is present (gVim)
   set guioptions-=L " Remove left scrollbar when window is split
   set guioptions-=T " Remove tool bar
   "set guioptions-=m " Remove menu bar
+  set mousehide " Hide mouse when user starts typing
   colorscheme desert
   if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
       set guifont=Deja\ Vu\ Sans\ Mono\ 12
