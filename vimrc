@@ -5,6 +5,7 @@ call pathogen#helptags() " Pathogen - generate help tags
 
 set nocompatible " No old school compatability
 set encoding=utf-8 " Default encoding utf-8
+"set shortmess+=1 " No startup message
 set title " Update terminal title
 set number " Show line numbers
 set ruler " Show cursor position at all times
@@ -58,7 +59,7 @@ set autoindent " Autoindent according to previous line indentation
 set wildmenu
 set wildmode=longest:full
 
-" Syntax highlighting automatic file detection and omnicompletion
+" Syntax highlighting, automatic file detection, and omnicompletion
 syntax on
 filetype plugin on
 filetype plugin indent on
@@ -172,7 +173,7 @@ imap <Tab> <C-P>
 "nnoremap Q gqap
 
 " Use sudo to write file
-cmap w!! w !sudo tee % >/dev/null
+"cmap w!! w !sudo tee % >/dev/null
 
 " Open NERDTree
 "nmap <leader>e :silent NERDTreeToggle<cr>:silent NERDTreeMirror<cr>
@@ -187,11 +188,23 @@ cmap w!! w !sudo tee % >/dev/null
 
 runtime macros/matchit.vim " Extended % pairs matching
 
-" Python specific settings
+" Python indenting rules and autocomplete
 autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal nosmartindent
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+" Autocomplete for Javascript
+autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
+
+" Autocomplete for PHP
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+
+" Autocomplete for HTML
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+
+" Autocomplete for CSS
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 " Strip trailing whitespace when saving a file
 "autocmd BufWritePre * :%s/\s\+$//e
