@@ -47,12 +47,12 @@ set softtabstop=4
 set shiftwidth=4
 set shiftround " Round indent to multiples of shiftwidth
 set expandtab " Expand tabs to spaces (purge evil tabs)
-"set smarttab " Insert tabs on start of line according to shiftwidth instead of tabstops
+"set smarttab " Insert tabs according to shiftwidth instead of tabstops
 
 " Indenting
 set autoindent " Autoindent according to previous line indentation
 "set copyindent " Copy the previous indentation on auto indenting
-"set cindent " Set C-style auto indenting - Interferes with filetype based indentation
+"set cindent " C-style auto indenting - Interferes with filetype based indentation
 "set smartindent " Intereferes with filetype based indentation
 
 " Auto completion: show menu
@@ -94,7 +94,7 @@ endif
 let g:notes_directory = $HOME . "/.vim/notes"
 
 " SnipMate
-let g:snippets_dir = $HOME . "/.vim/bundle/snipmate/snippets"
+"let g:snippets_dir = $HOME . "/.vim/bundle/snipmate/snippets"
 
 " Zencoding keymap
 let g:user_zen_expandabbr_key='<C-e>'
@@ -115,6 +115,9 @@ let g:mapleader=" "
 " Yankstack
 let g:yankstack_map_keys = 0 " No default mapping for yankstack
 call yankstack#setup() " Setup yankstack plugin
+
+" Ctags executable file location
+let Tlist_Ctags_Cmd='~/.local/bin/ctags'
 
 " More speed!
 "nnoremap ; :
