@@ -63,7 +63,7 @@ set wildmode=longest:full
 syntax on
 filetype plugin on
 filetype plugin indent on
-set ofu=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 
 " gVim options
 if has("gui_running") " Options for when GUI is present (gVim)
@@ -167,7 +167,7 @@ nnoremap <leader>b :silent CommandTBuffer<cr>
 "nnoremap <leader>b :silent BufExplorer<cr>
 
 " Map Control-Space to omnicompletion
-inoremap <C-space> <C-x><C-o>
+inoremap <c-space> <c-x><c-o>
 
 " Format selected text or paragraph with Q
 "vmap Q gq
@@ -182,30 +182,25 @@ inoremap <C-space> <C-x><C-o>
 
 " ----- MISC -----
 
+runtime macros/matchit.vim " Extended % pairs matching
+
 " Auto start NERDTree:
 "autocmd vimenter * NERDTree
 " Close vim when only NERDTree window left:
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-runtime macros/matchit.vim " Extended % pairs matching
-
 " Python indenting rules and autocomplete
 autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal nosmartindent
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
-" Autocomplete for Javascript
-autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-
-" Autocomplete for PHP
-autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-
-" Autocomplete for HTML
-autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
-
-" Autocomplete for CSS
-autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+" Omnicompletion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Strip trailing whitespace when saving a file
 "autocmd BufWritePre * :%s/\s\+$//e
