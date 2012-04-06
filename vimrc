@@ -197,10 +197,10 @@ autocmd FileType python setlocal nosmartindent
 " Omnicompletion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Strip trailing whitespace when saving a file
 "autocmd BufWritePre * :%s/\s\+$//e
