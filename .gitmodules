@@ -54,3 +54,6 @@
 	path = bundle/vim-rails
 	url = https://github.com/tpope/vim-rails.git
     ignore = dirty
+[submodule "bundle/pythoncomplete"]
+	path = bundle/pythoncomplete
+	url = https://github.com/vim-scripts/pythoncomplete.git
