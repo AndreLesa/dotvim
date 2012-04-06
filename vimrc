@@ -126,8 +126,8 @@ inoremap jj <esc>
 nnoremap j gj
 nnoremap k gk
 " Scroll full page with J and K
-nnoremap J <c-f>
-nnoremap K <c-b>
+"nnoremap J <c-f>
+"nnoremap K <c-b>
 " Y will yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 " Walk through yank stack
