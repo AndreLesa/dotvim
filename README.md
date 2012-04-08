@@ -1,12 +1,17 @@
-Installation:
+Vim
+=================
+My vim configuration.
 
+Installation:
+-------------
+
+### Clone repo
 git clone git://github.com/moljac024/dotvim.git ~/.vim
 
-Create symlink:
-
+### Create symlink:
 ln -s ~/.vim/vimrc ~/.vimrc
 
-Switch to the `~/.vim` directory, and fetch submodules:
+### Fetch submodules:
 
 cd ~/.vim
 git submodule init
