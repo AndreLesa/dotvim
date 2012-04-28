@@ -7,7 +7,7 @@ set nocompatible " No old school compatability
 set encoding=utf-8 " Default encoding utf-8
 "set shortmess+=1 " No startup message
 set title " Update terminal title
-set number " Show line numbers
+"set number " Show line numbers
 set ruler " Show cursor position at all times
 set showcmd " Show incomplete commands
 set showmode " Always show current mode
