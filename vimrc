@@ -119,8 +119,13 @@ call yankstack#setup() " Setup yankstack plugin
 " Ctags executable file location
 let Tlist_Ctags_Cmd='~/.local/bin/ctags'
 
+" Faster browsing
+nnoremap <space> <C-f>
+nnoremap <backspace> <C-b>
+
 " More speed!
-"nnoremap ; :
+nnoremap ; :
+nnoremap , ;
 inoremap jj <esc>
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
