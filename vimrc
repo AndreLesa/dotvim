@@ -8,6 +8,7 @@ set encoding=utf-8 " Default encoding utf-8
 "set shortmess+=1 " No startup message
 set title " Update terminal title
 "set number " Show line numbers
+set t_Co=256 " Use 256 colors in terminal
 set ruler " Show cursor position at all times
 set showcmd " Show incomplete commands
 set showmode " Always show current mode
@@ -108,9 +109,9 @@ let g:user_zen_expandabbr_key='<C-e>'
 "let mapleader=","
 "let g:mapleader=","
 
-"Set mapleader to space key
-let mapleader=" "
-let g:mapleader=" "
+"Set mapleader key
+let mapleader=","
+let g:mapleader="m"
 
 " Yankstack
 let g:yankstack_map_keys = 0 " No default mapping for yankstack

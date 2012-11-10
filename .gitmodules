@@ -65,3 +65,9 @@
 [submodule "bundle/ctrlp"]
 	path = bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
+[submodule "bundle/vim-lucius"]
+	path = bundle/vim-lucius
+	url = https://github.com/jonathanfilip/vim-lucius.git
+[submodule "bundle/inkpot"]
+	path = bundle/inkpot
+	url = https://github.com/ciaranm/inkpot.git
