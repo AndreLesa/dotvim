@@ -71,3 +71,12 @@
 [submodule "bundle/inkpot"]
 	path = bundle/inkpot
 	url = https://github.com/ciaranm/inkpot.git
+[submodule "bundle/vim-twig"]
+	path = bundle/vim-twig
+	url = https://github.com/beyondwords/vim-twig.git
+[submodule "bundle/vim-powerline"]
+	path = bundle/vim-powerline
+	url = https://github.com/Lokaltog/vim-powerline.git
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = https://github.com/majutsushi/tagbar.git

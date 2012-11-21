@@ -73,14 +73,16 @@ if has("gui_running") " Options for when GUI is present (gVim)
   set guioptions-=R " Remove right scrollbar when window is split
   set guioptions-=L " Remove left scrollbar when window is split
   set guioptions-=T " Remove tool bar
-  "set guioptions-=m " Remove menu bar
+  set guioptions-=m " Remove menu bar
   set mousehide " Hide mouse when user starts typing
-  colorscheme desert
+  "colorscheme desert
+  colorscheme zenburn
   if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
       set guifont=Deja\ Vu\ Sans\ Mono\ 12
   endif
 else " Options for when no GUI is present (console vim)
   "colorscheme desert
+  colorscheme zenburn
 endif
 
 " ----- VARIABLES -----
@@ -100,6 +102,9 @@ let g:notes_directory = $HOME . "/.vim/notes"
 " Zencoding keymap
 let g:user_zen_expandabbr_key='<C-e>'
 
+" Tagbar ctags executable
+let g:tagbar_ctags_bin='~/.local/bin/ctags'
+
 " Change EasyMotion leader key - Default is <Leader><Leader>
 "let g:EasyMotion_leader_key = '<Leader>'
 
@@ -111,7 +116,7 @@ let g:user_zen_expandabbr_key='<C-e>'
 
 "Set mapleader key
 let mapleader=","
-let g:mapleader="m"
+let g:mapleader=","
 
 " Yankstack
 let g:yankstack_map_keys = 0 " No default mapping for yankstack
@@ -126,7 +131,7 @@ nnoremap <backspace> <C-b>
 
 " More speed!
 nnoremap ; :
-nnoremap , ;
+"nnoremap , ;
 inoremap jj <esc>
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
@@ -158,6 +163,7 @@ nnoremap <leader>n :silent noh<cr>
 
 " Split window and switch to it
 nnoremap <leader>w <c-w>v<c-w>l
+nnoremap <leader>s <c-w>s<c-w>j
 " Close other windows
 nnoremap <leader>o <c-w>o
 
@@ -170,10 +176,8 @@ nnoremap <c-l> <c-w>l
 " Strip trailing whitespaces
 nnoremap <leader>W <esc>:%s/\s\+$//<cr>:let @/=''<cr>
 
-" Command-T buffer list
-nnoremap <leader>b :silent CommandTBuffer<cr>
 " Open buffer explorer
-"nnoremap <leader>b :silent BufExplorer<cr>
+nnoremap <leader>b :silent BufExplorer<cr>
 
 " Map Control-Space to omnicompletion
 inoremap <c-space> <c-x><c-o>
@@ -212,5 +216,5 @@ autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
 " Strip trailing whitespace when saving a file
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
