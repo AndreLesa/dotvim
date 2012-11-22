@@ -110,7 +110,7 @@ nnoremap <c-l> <c-w>l
 nnoremap <leader>W <esc>:%s/\s\+$//<cr>:let @/=''<cr>
 
 " Open buffer explorer
-nnoremap <leader>b :silent BufExplorer<cr>
+nnoremap <leader>b :silent CtrlPBuffer<cr>
 
 " Map Control-Space to omnicompletion
 inoremap <c-space> <c-x><c-o>
@@ -190,8 +190,10 @@ endif
 " Vim Notes
 let g:notes_directory = $HOME . "/.vim/notes"
 
-" SnipMate
-"let g:snippets_dir = $HOME . "/.vim/bundle/snipmate/snippets"
+" UltiSnips snippets directory
+let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+" Don't reverse directory lookup
+let g:UltiSnipsDontReverseSearchPath="1"
 
 " Zencoding keymap
 let g:user_zen_expandabbr_key='<C-e>'
