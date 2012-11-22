@@ -56,74 +56,11 @@ set autoindent " Autoindent according to previous line indentation
 "set cindent " C-style auto indenting - Interferes with filetype based indentation
 "set smartindent " Intereferes with filetype based indentation
 
-" Auto completion: show menu
-set wildmenu
-set wildmode=longest:full
-
-" Syntax highlighting, automatic file detection, and omnicompletion
-syntax on
-filetype plugin on
-filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
-
-" gVim options
-if has("gui_running") " Options for when GUI is present (gVim)
-  set guioptions-=r " Remove right scrollbar
-  set guioptions-=l " Remove left scrollbar
-  set guioptions-=R " Remove right scrollbar when window is split
-  set guioptions-=L " Remove left scrollbar when window is split
-  set guioptions-=T " Remove tool bar
-  set guioptions-=m " Remove menu bar
-  set mousehide " Hide mouse when user starts typing
-  "colorscheme desert
-  colorscheme zenburn
-  if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
-      set guifont=Deja\ Vu\ Sans\ Mono\ 12
-  endif
-else " Options for when no GUI is present (console vim)
-  "colorscheme desert
-  colorscheme zenburn
-endif
-
-" ----- VARIABLES -----
-
-" NERDTree
-"let NERDTreeShowBookmarks=0
-"let NERDTreeQuitOnOpen=1
-"let NERDTreeKeepTreeInNewTab=1
-"let NERDTreeChDirMode=0
-
-" Vim Notes
-let g:notes_directory = $HOME . "/.vim/notes"
-
-" SnipMate
-"let g:snippets_dir = $HOME . "/.vim/bundle/snipmate/snippets"
-
-" Zencoding keymap
-let g:user_zen_expandabbr_key='<C-e>'
-
-" Tagbar ctags executable
-let g:tagbar_ctags_bin='~/.local/bin/ctags'
-
-" Change EasyMotion leader key - Default is <Leader><Leader>
-"let g:EasyMotion_leader_key = '<Leader>'
-
 " ------ KEYBINDINGS -----
-
-" Set mapleader to comma key
-"let mapleader=","
-"let g:mapleader=","
 
 "Set mapleader key
 let mapleader=","
 let g:mapleader=","
-
-" Yankstack
-let g:yankstack_map_keys = 0 " No default mapping for yankstack
-call yankstack#setup() " Setup yankstack plugin
-
-" Ctags executable file location
-let Tlist_Ctags_Cmd='~/.local/bin/ctags'
 
 " Faster browsing
 nnoremap <space> <C-f>
@@ -136,11 +73,9 @@ inoremap jj <esc>
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
 nnoremap k gk
-" Scroll full page with J and K
-"nnoremap J <c-f>
-"nnoremap K <c-b>
 " Y will yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
+
 " Walk through yank stack
 nmap <leader>p <Plug>yankstack_substitute_older_paste
 nmap <leader>P <Plug>yankstack_substitute_newer_paste
@@ -152,8 +87,6 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 " Delete buffer
 nnoremap <f4> <esc>:bw<cr>
 " Paste from system clipboard
-imap <f3> <esc>"+gP<cr>
-nmap <f3> <esc>"+gP<cr>
 nnoremap <leader>p <esc>"+gP<cr>
 " Compile file
 nnoremap <f8> <esc>:silent cd %:p:h<cr>:make<cr>
@@ -189,23 +122,15 @@ inoremap <c-space> <c-x><c-o>
 " Use sudo to write file
 "cmap w!! w !sudo tee % >/dev/null
 
-" Open NERDTree
-"nmap <leader>e :silent NERDTreeToggle<cr>:silent NERDTreeMirror<cr>
-"nmap <leader>e :silent NERDTreeToggle<cr>
+" Auto completion: show menu
+set wildmenu
+set wildmode=longest:full
 
-" ----- MISC -----
-
-runtime macros/matchit.vim " Extended % pairs matching
-
-" Auto start NERDTree:
-"autocmd vimenter * NERDTree
-" Close vim when only NERDTree window left:
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" Python indenting rules and autocomplete
-autocmd FileType python setlocal tabstop=4
-autocmd FileType python setlocal shiftwidth=4
-autocmd FileType python setlocal nosmartindent
+" Syntax highlighting, automatic file detection, and omnicompletion
+syntax on
+filetype plugin on
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 " Omnicompletion
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
@@ -215,6 +140,74 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
+" Python indenting rules and autocomplete
+autocmd FileType python setlocal tabstop=4
+autocmd FileType python setlocal shiftwidth=4
+autocmd FileType python setlocal nosmartindent
+
 " Strip trailing whitespace when saving a file
 autocmd BufWritePre * :%s/\s\+$//e
 
+" Extended % pairs matching
+runtime macros/matchit.vim
+
+" gVim options
+if has("gui_running") " Options for when GUI is present (gVim)
+  set guioptions-=r " Remove right scrollbar
+  set guioptions-=l " Remove left scrollbar
+  set guioptions-=R " Remove right scrollbar when window is split
+  set guioptions-=L " Remove left scrollbar when window is split
+  set guioptions-=T " Remove tool bar
+  set guioptions-=m " Remove menu bar
+  set mousehide " Hide mouse when user starts typing
+  "colorscheme desert
+  colorscheme zenburn
+  if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
+      set guifont=Deja\ Vu\ Sans\ Mono\ 12
+  endif
+else " Options for when no GUI is present (console vim)
+  "colorscheme desert
+  colorscheme zenburn
+endif
+
+" ----- PLUGINS -----
+
+" NERDTree
+"let NERDTreeShowBookmarks=0
+"let NERDTreeQuitOnOpen=1
+"let NERDTreeKeepTreeInNewTab=1
+"let NERDTreeChDirMode=0
+
+" Open NERDTree
+"nmap <leader>e :silent NERDTreeToggle<cr>:silent NERDTreeMirror<cr>
+"nmap <leader>e :silent NERDTreeToggle<cr>
+
+" Auto start NERDTree:
+"autocmd vimenter * NERDTree
+" Close vim when only NERDTree window left:
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Vim Notes
+let g:notes_directory = $HOME . "/.vim/notes"
+
+" SnipMate
+"let g:snippets_dir = $HOME . "/.vim/bundle/snipmate/snippets"
+
+" Zencoding keymap
+let g:user_zen_expandabbr_key='<C-e>'
+
+" Powerline file path style
+let g:Powerline_stl_path_style = 'filename'
+
+" Tagbar ctags executable
+let g:tagbar_ctags_bin='~/.local/bin/ctags'
+
+" Change EasyMotion leader key - Default is <Leader><Leader>
+"let g:EasyMotion_leader_key = '<Leader>'
+
+" Yankstack
+let g:yankstack_map_keys = 0 " No default mapping for yankstack
+call yankstack#setup() " Setup yankstack plugin
+
+" Ctags executable file location
+let Tlist_Ctags_Cmd='~/.local/bin/ctags'
