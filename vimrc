@@ -191,7 +191,8 @@ endif
 let g:notes_directory = $HOME . "/.vim/notes"
 
 " UltiSnips snippets directory
-let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
+set runtimepath+=~/.vim/snippets/
+"let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 " Don't reverse directory lookup
 let g:UltiSnipsDontReverseSearchPath="1"
 
