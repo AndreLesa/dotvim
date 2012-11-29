@@ -83,3 +83,9 @@
 [submodule "bundle/html5"]
 	path = bundle/html5
 	url = https://github.com/othree/html5.vim.git
+[submodule "bundle/vimux"]
+	path = bundle/vimux
+	url = https://github.com/benmills/vimux.git
+[submodule "bundle/vim-symfony"]
+	path = bundle/vim-symfony
+	url = https://github.com/docteurklein/vim-symfony.git

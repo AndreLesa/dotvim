@@ -151,6 +151,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 " Extended % pairs matching
 runtime macros/matchit.vim
 
+" Solarized colors
+"let g:solarized_termcolors=256
+
 " gVim options
 if has("gui_running") " Options for when GUI is present (gVim)
   set guioptions-=r " Remove right scrollbar
@@ -168,6 +171,7 @@ if has("gui_running") " Options for when GUI is present (gVim)
 else " Options for when no GUI is present (console vim)
   "colorscheme desert
   colorscheme zenburn
+  "colorscheme solarized
 endif
 
 " ----- PLUGINS -----
