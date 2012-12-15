@@ -21,6 +21,7 @@ set timeoutlen=750 " Set the timeout for mapped key combos in ms (default 1000)
 set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatibility
 set list " Show whitespace characters
 set listchars=tab:>-,trail:·,extends:# " Highlight problematic whitespace
+set nofoldenable " Don't fold code
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set shortmess=at " Be less verbose
 "set visualbell " Don't beep, blink instead
@@ -62,14 +63,18 @@ set autoindent " Autoindent according to previous line indentation
 let mapleader=","
 let g:mapleader=","
 
+set pastetoggle=<F3>
+
 " Faster browsing
 nnoremap <space> <C-f>
 nnoremap <backspace> <C-b>
 
 " More speed!
-nnoremap ; :
+"nnoremap ; :
 "nnoremap , ;
-inoremap jj <esc>
+"inoremap jj <esc>
+"inoremap jk <esc>
+"inoremap kk <esc>
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
 nnoremap k gk
@@ -85,7 +90,8 @@ nmap <leader>P <Plug>yankstack_substitute_newer_paste
 "nnoremap <f2> <esc>:bnext<cr>
 
 " Delete buffer
-nnoremap <f4> <esc>:bw<cr>
+"nnoremap <f4> <esc>:bw<cr>
+nnoremap <leader>k <esc>:bw<cr>
 " Paste from system clipboard
 nnoremap <leader>p <esc>"+gP<cr>
 " Compile file
@@ -121,6 +127,9 @@ inoremap <c-space> <c-x><c-o>
 
 " Use sudo to write file
 "cmap w!! w !sudo tee % >/dev/null
+
+" Also write file with W
+cmap W w
 
 " Auto completion: show menu
 set wildmenu
@@ -161,7 +170,7 @@ if has("gui_running") " Options for when GUI is present (gVim)
   set guioptions-=R " Remove right scrollbar when window is split
   set guioptions-=L " Remove left scrollbar when window is split
   set guioptions-=T " Remove tool bar
-  set guioptions-=m " Remove menu bar
+  "set guioptions-=m " Remove menu bar
   set mousehide " Hide mouse when user starts typing
   "colorscheme desert
   colorscheme zenburn
@@ -190,6 +199,10 @@ endif
 "autocmd vimenter * NERDTree
 " Close vim when only NERDTree window left:
 "autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
+" Supertab
+let g:SupertabMappingForward = '<c-space>'
+let g:SupertabMappingBackward = '<s-c-space>'
 
 " Vim Notes
 let g:notes_directory = $HOME . "/.vim/notes"

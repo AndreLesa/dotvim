@@ -1,0 +1,21 @@
+## Smoki's twig snippets
+
+snippet twig "Beggining symfony twig" b
+{% extends '::base.html.twig' %}
+{% block title %} ${1:Title} {% endblock %}
+{% block body %}
+
+endsnippet
+
+snippet end "End block for twig"
+{% endblock %}
+endsnippet
+
+snippet block "Twig block"
+{% block %}
+${1}
+{% endblock %}
+endsnippet
+
+# :vim:ft=snippets:
+
