@@ -257,7 +257,7 @@ let g:ctrlp_root_markers = ['composer.json', 'package.json']
 
 " Ignore these files and directories
 let g:ctrlp_custom_ignore = {
-            \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\cache*|\vendor$|\Downloads$|\Igre*|\Install',
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$\|cache$\|vendor$\|Downloads$\|Igre$\|Install$',
             \ 'file': '\v\.(exe|so|dll|pyc|zip|tar\.gz|tar\.bz2|pdf|doc|docx|odt|png|jpg|gif|xcf|swf|flv|mp3|mp4|mkv|torrent|jar)$',
             \ }
 
