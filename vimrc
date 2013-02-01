@@ -7,13 +7,13 @@ endif
 
 " Make directory if it doesn't exist
 function! EnsureDirExists (dir)
-  if !isdirectory(a:dir)
-    if exists("*mkdir")
-      call mkdir(a:dir, 'p')
-    else
-      echo "Please create directory: " . a:dir
+    if !isdirectory(a:dir)
+        if exists("*mkdir")
+            call mkdir(a:dir, 'p')
+        else
+            echo "Please create directory: " . a:dir
+        endif
     endif
-  endif
 endfunction
 
 " Ensure needed directories are there
@@ -56,11 +56,11 @@ set encoding=utf-8 " Default encoding utf-8
 set title " Update terminal title
 set shortmess=at " Be less verbose
 "set number " Show line numbers
+"set cursorline " Highlight current line
 "set visualbell " Don't beep, blink instead
 set noerrorbells " Don't beep, don't you even blink
 set t_Co=256 " Use 256 colors in terminal
 set ruler " Show cursor position at all times
-"set cursorline " Highlight current line
 set showcmd " Show incomplete commands
 set showmode " Always show current mode
 set ls=2 " Always show status line
@@ -80,15 +80,19 @@ set autoread " Automatically reload a file when change detected
 
 "set showmatch " Show matching brackets
 "set nowrap " Do not wrap lines
-"set autochdir " Change directory automatically - can mess up some plugins
+"set autochdir " Auto change directory - better left off, messes up plugins
 
 " Search options
 set gdefault " Make global replace default
 set ignorecase " Ignore case in search
-set smartcase " Ignore case when all lowercase characters
+set smartcase " Ignore case but only when all lowercase characters
 set incsearch " Incremental search
 set hlsearch " Highlight search results
 set wrapscan " Make search wrap around
+
+" Auto completion: show menu
+set wildmenu
+set wildmode=longest:full
 
 " Tab options
 set tabstop=4
@@ -100,9 +104,13 @@ set expandtab " Expand tabs to spaces (purge evil tabs)
 
 " Indenting
 set autoindent " Autoindent according to previous line indentation
-"set copyindent " Copy the previous indentation on auto indenting
-"set cindent " C-style auto indenting - Interferes with filetype based indentation
-"set smartindent " Intereferes with filetype based indentation
+"set nosmartindent " Intereferes with filetype based indentation
+"set nocopyindent " Copy the previous indentation on auto indenting
+"set nocindent " C-style auto indenting - Interferes with filetype based indentation
+
+" Tags
+"set tags=./tags,tags;$HOME " search current dir, then up recursively until $HOME
+set tags=./tags;/ " search current dir, then up recursively until root
 
 " ----- GUI and colors -----
 
@@ -114,30 +122,26 @@ call togglebg#map("<F4>")
 
 " gVim options
 if has("gui_running") " Options for when GUI is present (gVim)
-  set guioptions-=r " Remove right scrollbar
-  set guioptions-=l " Remove left scrollbar
-  set guioptions-=R " Remove right scrollbar when window is split
-  set guioptions-=L " Remove left scrollbar when window is split
-  set guioptions-=T " Remove tool bar
-  "set guioptions-=m " Remove menu bar
-  set mousehide " Hide mouse when user starts typing
-  "colorscheme desert
-  "colorscheme zenburn
-  colorscheme solarized
-  if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
-      set guifont=Deja\ Vu\ Sans\ Mono\ 12
-  endif
+    set guioptions-=r " Remove right scrollbar
+    set guioptions-=l " Remove left scrollbar
+    set guioptions-=R " Remove right scrollbar when window is split
+    set guioptions-=L " Remove left scrollbar when window is split
+    set guioptions-=T " Remove tool bar
+    "set guioptions-=m " Remove menu bar
+    set mousehide " Hide mouse when user starts typing
+    "colorscheme desert
+    "colorscheme zenburn
+    colorscheme solarized
+    if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
+        set guifont=Deja\ Vu\ Sans\ Mono\ 12
+    endif
 else " Options for when no GUI is present (console vim)
-  "colorscheme desert
-  "colorscheme zenburn
-  "colorscheme solarized
+    "colorscheme desert
+    "colorscheme zenburn
+    "colorscheme solarized
 endif
 
 " ----- PROGRAMMING -----
-
-" Auto completion: show menu
-set wildmenu
-set wildmode=longest:full
 
 " Syntax highlighting, automatic file detection, and omnicompletion
 syntax on
@@ -153,10 +157,15 @@ autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 "autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
-" Python indenting rules and autocomplete
+" Python indenting rules
 autocmd FileType python setlocal tabstop=4
+autocmd FileType python setlocal softtabstop=4
 autocmd FileType python setlocal shiftwidth=4
-autocmd FileType python setlocal nosmartindent
+
+" Html indenting rules
+autocmd FileType xml,html,html.twig setlocal tabstop=2
+autocmd FileType xml,html,html.twig setlocal softtabstop=2
+autocmd FileType xml,html,html.twig setlocal shiftwidth=2
 
 " Strip trailing whitespace when saving a file
 autocmd BufWritePre * :silent %s/\s\+$//e
@@ -243,12 +252,17 @@ cnoremap w!! w !sudo tee % >/dev/null
 
 " ----- PLUGIN KEYBINDINGS -----
 
+" Open a note
+nnoremap <c-n> :edit note:
+inoremap <c-n> <esc>:edit note:
+
 " Open buffer explorer
 nnoremap <c-b> :silent CtrlPBuffer<cr>
-inoremap <c-b> <c-o>:silent CtrlPBuffer<cr>
+inoremap <c-b> <esc>:silent CtrlPBuffer<cr>
 
 " Undo tree
 nnoremap <leader>u :UndotreeToggle<cr>
+nnoremap <c-u> :UndotreeToggle<cr>
 
 " ----- PLUGINS -----
 
@@ -267,6 +281,11 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll|pyc|zip|tar\.gz|tar\.bz2|pdf|doc|docx|odt|png|jpg|gif|xcf|swf|flv|mp3|mp4|mkv|torrent|jar)$',
             \ }
 
+" Syntastic
+let g:syntastic_mode_map = { 'mode': 'active',
+            \ 'active_filetypes': [],
+            \ 'passive_filetypes': ['html', 'html.twig'] }
+
 " NERDTree
 "let NERDTreeShowBookmarks=0
 "let NERDTreeQuitOnOpen=1
@@ -276,6 +295,9 @@ let g:ctrlp_custom_ignore = {
 " Open NERDTree
 "nmap <leader>e :silent NERDTreeToggle<cr>:silent NERDTreeMirror<cr>
 nmap <leader>e :silent NERDTreeToggle<cr>
+
+" If nerdtree is last and only buffer, quit vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Supertab
 let g:SupertabMappingForward = '<c-space>'

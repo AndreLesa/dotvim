@@ -1,6 +1,7 @@
 backup/
 undo/
-tmp/
+sessions/
 notes/
-tags
+tmp/
 .netrwhist
+tags
