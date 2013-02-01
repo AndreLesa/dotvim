@@ -1,3 +1,6 @@
+" ----- FIRST THINGS FIRST -----
+set nocompatible " No old school compatability
+
 " ----- DIRECTORIES -----
 
 " On Windows, also use '.vim' instead of 'vimfiles'
@@ -18,6 +21,7 @@ endfunction
 
 " Ensure needed directories are there
 call EnsureDirExists($HOME . '/.vim/backup')
+call EnsureDirExists($HOME . '/.vim/sessions')
 call EnsureDirExists($HOME . '/.vim/undo')
 call EnsureDirExists($HOME . '/.vim/notes')
 
@@ -51,7 +55,6 @@ call yankstack#setup() " Setup yankstack plugin
 
 " ----- VIM OPTIONS -----
 
-set nocompatible " No old school compatability
 set encoding=utf-8 " Default encoding utf-8
 set title " Update terminal title
 set shortmess=at " Be less verbose
@@ -71,12 +74,15 @@ set nobackup " No backup files
 set noswapfile " No swap file, that thing is so 70s
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatibility
-set list " Show whitespace characters
-set listchars=tab:>-,trail:·,extends:# " Highlight problematic whitespace
 set timeoutlen=750 " Set the timeout for mapped key combos in ms (default 1000)
 set history=1000 " Remember more commands and search history, like an elephant
 set undolevels=1000 " Use many muchos levels of undo
 set autoread " Automatically reload a file when change detected
+set list " Show whitespace characters
+set listchars=tab:>-,trail:·,extends:# " Highlight problematic whitespace
+
+" Strip trailing whitespace when saving a file
+autocmd BufWritePre * :silent %s/\s\+$//e
 
 "set showmatch " Show matching brackets
 "set nowrap " Do not wrap lines
@@ -94,25 +100,11 @@ set wrapscan " Make search wrap around
 set wildmenu
 set wildmode=longest:full
 
-" Tab options
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround " Round indent to multiples of shiftwidth
-set expandtab " Expand tabs to spaces (purge evil tabs)
-"set smarttab " Insert tabs according to shiftwidth instead of tabstops
-
-" Indenting
-set autoindent " Autoindent according to previous line indentation
-"set nosmartindent " Intereferes with filetype based indentation
-"set nocopyindent " Copy the previous indentation on auto indenting
-"set nocindent " C-style auto indenting - Interferes with filetype based indentation
-
 " Tags
 "set tags=./tags,tags;$HOME " search current dir, then up recursively until $HOME
 set tags=./tags;/ " search current dir, then up recursively until root
 
-" ----- GUI and colors -----
+" ----- UI, COLORS AND STUFF -----
 
 " Solarized colors
 "let g:solarized_termcolors=256
@@ -141,7 +133,21 @@ else " Options for when no GUI is present (console vim)
     "colorscheme solarized
 endif
 
-" ----- PROGRAMMING -----
+" ----- CODING -----
+
+" General tab options
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround " Round indent to multiples of shiftwidth
+set expandtab " Expand tabs to spaces (purge evil tabs)
+"set smarttab " Insert tabs according to shiftwidth instead of tabstops
+
+" General indenting
+set autoindent " Autoindent according to previous line indentation
+"set nosmartindent " Intereferes with filetype based indentation
+"set nocopyindent " Copy the previous indentation on auto indenting
+"set nocindent " C-style auto indenting - Interferes with filetype based indentation
 
 " Syntax highlighting, automatic file detection, and omnicompletion
 syntax on
@@ -161,17 +167,17 @@ autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal softtabstop=4
 autocmd FileType python setlocal shiftwidth=4
+autocmd FileType python setlocal nosmartindent
 
 " Html indenting rules
 autocmd FileType xml,html,html.twig setlocal tabstop=2
 autocmd FileType xml,html,html.twig setlocal softtabstop=2
 autocmd FileType xml,html,html.twig setlocal shiftwidth=2
 
-" Strip trailing whitespace when saving a file
-autocmd BufWritePre * :silent %s/\s\+$//e
-
-" Extended % pairs matching
-runtime macros/matchit.vim
+" Javascript indenting rules
+autocmd FileType javascript setlocal tabstop=2
+autocmd FileType javascript setlocal softtabstop=2
+autocmd FileType javascript setlocal shiftwidth=2
 
 " ------ FUNCTIONS -----
 
@@ -182,17 +188,19 @@ let g:mapleader=","
 
 " Faster browsing
 nnoremap <space> <C-f>
-nnoremap <backspace> <C-b>
+nnoremap <s-space> <C-b>
 vnoremap <space> <C-f>
-vnoremap <backspace> <C-b>
+vnoremap <s-space> <C-b>
 
 " More speed!
-"nnoremap ; :
-"nnoremap , ;
+nnoremap ; :
 inoremap jj <esc>
+cnoremap jj <c-c><esc>
+
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
 nnoremap k gk
+
 " Y will yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
@@ -209,9 +217,11 @@ nnoremap <leader>/ :silent noh<cr>
 
 " Close other windows
 nnoremap <leader>1 <c-w>o
+
 " Split window and switch to it
 nnoremap <leader>2 <c-w>s<c-w>j
 nnoremap <leader>3 <c-w>v<c-w>l
+
 " Close current window
 nnoremap <leader>4 <c-w>c
 
@@ -233,7 +243,7 @@ nnoremap Q gqap
 
 " Replace word under cursor
 "nnoremap <leader>s :%s/\<<C-r><C-w>\>/
-" Replace word under cursor globally by default
+" Replace word under cursor globally
 nnoremap <leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 
 " Visual shifting (does not exit Visual mode)
@@ -263,6 +273,11 @@ inoremap <c-b> <esc>:silent CtrlPBuffer<cr>
 " Undo tree
 nnoremap <leader>u :UndotreeToggle<cr>
 nnoremap <c-u> :UndotreeToggle<cr>
+
+" ----- MISC -----
+
+" Extended % pairs matching
+runtime macros/matchit.vim
 
 " ----- PLUGINS -----
 
