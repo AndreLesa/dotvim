@@ -39,7 +39,8 @@ endif
 " Pathogen - easier management of vim plugins
 runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 " Temporarily disabled plugins
-"let g:pathogen_disabled = ['bufexplorer']
+let g:pathogen_disabled = []
+"call add(g:pathogen_disabled, 'bufexplorer')
 "call add(g:pathogen_disabled, 'vim-powerline')
 
 " Initialize pathogen
@@ -132,6 +133,37 @@ else " Options for when no GUI is present (console vim)
   "colorscheme solarized
 endif
 
+" ----- PROGRAMMING -----
+
+" Auto completion: show menu
+set wildmenu
+set wildmode=longest:full
+
+" Syntax highlighting, automatic file detection, and omnicompletion
+syntax on
+filetype plugin on
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
+
+" Omnicompletion
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+" Python indenting rules and autocomplete
+autocmd FileType python setlocal tabstop=4
+autocmd FileType python setlocal shiftwidth=4
+autocmd FileType python setlocal nosmartindent
+
+" Strip trailing whitespace when saving a file
+autocmd BufWritePre * :silent %s/\s\+$//e
+
+" Extended % pairs matching
+runtime macros/matchit.vim
+
 " ------ FUNCTIONS -----
 
 " ------ KEYBINDINGS -----
@@ -183,10 +215,6 @@ nnoremap <c-l> <c-w>l
 " Strip trailing whitespaces
 nnoremap <leader>W :silent %s/\s\+$//<cr>:let @/=''<cr>
 
-" Open buffer explorer
-nnoremap <c-b> :silent CtrlPBuffer<cr>
-inoremap <c-b> <c-o>:silent CtrlPBuffer<cr>
-
 " Map Control-Space to omnicompletion
 inoremap <c-space> <c-x><c-o>
 
@@ -213,36 +241,14 @@ cnoremap Q q
 " Use sudo to write file
 cnoremap w!! w !sudo tee % >/dev/null
 
-" ----- PROGRAMMING -----
+" ----- PLUGIN KEYBINDINGS -----
 
-" Auto completion: show menu
-set wildmenu
-set wildmode=longest:full
+" Open buffer explorer
+nnoremap <c-b> :silent CtrlPBuffer<cr>
+inoremap <c-b> <c-o>:silent CtrlPBuffer<cr>
 
-" Syntax highlighting, automatic file detection, and omnicompletion
-syntax on
-filetype plugin on
-filetype plugin indent on
-set omnifunc=syntaxcomplete#Complete
-
-" Omnicompletion
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-
-" Python indenting rules and autocomplete
-autocmd FileType python setlocal tabstop=4
-autocmd FileType python setlocal shiftwidth=4
-autocmd FileType python setlocal nosmartindent
-
-" Strip trailing whitespace when saving a file
-autocmd BufWritePre * :silent %s/\s\+$//e
-
-" Extended % pairs matching
-runtime macros/matchit.vim
+" Undo tree
+nnoremap <leader>u :UndotreeToggle<cr>
 
 " ----- PLUGINS -----
 
