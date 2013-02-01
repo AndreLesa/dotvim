@@ -157,6 +157,7 @@ nnoremap Y y$
 
 " Delete buffer
 nnoremap <leader>k :bw<cr>
+
 " Paste from system clipboard
 nnoremap <c-p> "+gP<cr>
 inoremap <c-p> <c-r><c-o>+
@@ -184,7 +185,7 @@ nnoremap <leader>W :silent %s/\s\+$//<cr>:let @/=''<cr>
 
 " Open buffer explorer
 nnoremap <c-b> :silent CtrlPBuffer<cr>
-inoremap <c-b> <esc>:silent CtrlPBuffer<cr>
+inoremap <c-b> <c-o>:silent CtrlPBuffer<cr>
 
 " Map Control-Space to omnicompletion
 inoremap <c-space> <c-x><c-o>
