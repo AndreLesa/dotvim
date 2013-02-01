@@ -9,6 +9,7 @@ git submodule init
 git submodule update
 
 if [[ ! -f $HOME/.local/bin/ctags ]]; then
-    ./install-ctags
+    cd $VIM_DIRECTORY
+    ./bin/install-ctags.sh
 fi
 

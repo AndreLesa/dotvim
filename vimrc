@@ -1,37 +1,83 @@
+" ----- DIRECTORIES -----
+
+" On Windows, also use '.vim' instead of 'vimfiles'
+if has('win32') || has('win64')
+    set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+endif
+
+" Make directory if it doesn't exist
+function! EnsureDirExists (dir)
+  if !isdirectory(a:dir)
+    if exists("*mkdir")
+      call mkdir(a:dir, 'p')
+    else
+      echo "Please create directory: " . a:dir
+    endif
+  endif
+endfunction
+
+" Ensure needed directories are there
+call EnsureDirExists($HOME . '/.vim/backup')
+call EnsureDirExists($HOME . '/.vim/undo')
+call EnsureDirExists($HOME . '/.vim/notes')
+
+" Keep all backups in a single directory
+if isdirectory($HOME . '/.vim/backup')
+    set backupdir=~/.vim/backup//
+endif
+
+" Keep all undo in a single directory
+if isdirectory($HOME . '/.vim/undo')
+    if has("persistent_undo")
+        set undodir=~/.vim/undo//
+        set undofile
+    endif
+endif
+
+" ----- PLUGINS -----
+
 " Pathogen - easier management of vim plugins
-runtime bundle/vim-pathogen/autoload/pathogen.vim " Pathogen - source plugin
+runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
+" Temporarily disabled plugins
+"let g:pathogen_disabled = ['bufexplorer']
+"call add(g:pathogen_disabled, 'vim-powerline')
+
+" Initialize pathogen
 call pathogen#infect() " Pathogen - do magic by setting up runtime paths
 call pathogen#helptags() " Pathogen - generate help tags
+" Initialize other plugins
+call yankstack#setup() " Setup yankstack plugin
+
+" ----- VIM OPTIONS -----
 
 set nocompatible " No old school compatability
 set encoding=utf-8 " Default encoding utf-8
-"set shortmess+=1 " No startup message
 set title " Update terminal title
+set shortmess=at " Be less verbose
 "set number " Show line numbers
+"set visualbell " Don't beep, blink instead
+set noerrorbells " Don't beep, don't you even blink
 set t_Co=256 " Use 256 colors in terminal
 set ruler " Show cursor position at all times
+"set cursorline " Highlight current line
 set showcmd " Show incomplete commands
 set showmode " Always show current mode
 set ls=2 " Always show status line
 set hidden " Enable multiple buffers open
 set scrolloff=3 " Maintain more context around cursor when scrolling
-set history=1000 " Remember more commands and search history, like an elephant
-set undolevels=1000 " Use many muchos levels of undo
-set timeoutlen=750 " Set the timeout for mapped key combos in ms (default 1000)
+set nofoldenable " Don't fold code
+set nobackup " No backup files
+set noswapfile " No swap file, that thing is so 70s
+set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatibility
 set list " Show whitespace characters
 set listchars=tab:>-,trail:·,extends:# " Highlight problematic whitespace
-set nofoldenable " Don't fold code
-set backspace=indent,eol,start " Allow backspacing over everything in insert mode
-set shortmess=at " Be less verbose
-"set visualbell " Don't beep, blink instead
-set noerrorbells " Don't beep, don't you even blink
-set backupdir=~/.vim/backup,/tmp " Don't clutter up current directory
-set nobackup " No backup files
-set noswapfile " No swap file, that thing is so 70s
+set timeoutlen=750 " Set the timeout for mapped key combos in ms (default 1000)
+set history=1000 " Remember more commands and search history, like an elephant
+set undolevels=1000 " Use many muchos levels of undo
+set autoread " Automatically reload a file when change detected
 
 "set showmatch " Show matching brackets
-set autoread " Automatically reload a file when change detected
 "set nowrap " Do not wrap lines
 "set autochdir " Change directory automatically - can mess up some plugins
 
@@ -57,54 +103,75 @@ set autoindent " Autoindent according to previous line indentation
 "set cindent " C-style auto indenting - Interferes with filetype based indentation
 "set smartindent " Intereferes with filetype based indentation
 
+" ----- GUI and colors -----
+
+" Solarized colors
+"let g:solarized_termcolors=256
+
+" Toggle background color for solarized
+call togglebg#map("<F4>")
+
+" gVim options
+if has("gui_running") " Options for when GUI is present (gVim)
+  set guioptions-=r " Remove right scrollbar
+  set guioptions-=l " Remove left scrollbar
+  set guioptions-=R " Remove right scrollbar when window is split
+  set guioptions-=L " Remove left scrollbar when window is split
+  set guioptions-=T " Remove tool bar
+  "set guioptions-=m " Remove menu bar
+  set mousehide " Hide mouse when user starts typing
+  "colorscheme desert
+  "colorscheme zenburn
+  colorscheme solarized
+  if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
+      set guifont=Deja\ Vu\ Sans\ Mono\ 12
+  endif
+else " Options for when no GUI is present (console vim)
+  "colorscheme desert
+  "colorscheme zenburn
+  "colorscheme solarized
+endif
+
+" ------ FUNCTIONS -----
+
 " ------ KEYBINDINGS -----
 
 "Set mapleader key
-let mapleader=","
 let g:mapleader=","
-
-set pastetoggle=<F3>
 
 " Faster browsing
 nnoremap <space> <C-f>
 nnoremap <backspace> <C-b>
+vnoremap <space> <C-f>
+vnoremap <backspace> <C-b>
 
 " More speed!
 "nnoremap ; :
 "nnoremap , ;
-"inoremap jj <esc>
-"inoremap jk <esc>
-"inoremap kk <esc>
+inoremap jj <esc>
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
 nnoremap k gk
 " Y will yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
 
-" Walk through yank stack
-nmap <leader>p <Plug>yankstack_substitute_older_paste
-nmap <leader>P <Plug>yankstack_substitute_newer_paste
-
-" Switch through buffers
-"nnoremap <f1> <esc>:bprev<cr>
-"nnoremap <f2> <esc>:bnext<cr>
-
 " Delete buffer
-"nnoremap <f4> <esc>:bw<cr>
-nnoremap <leader>k <esc>:bw<cr>
+nnoremap <leader>k :bw<cr>
 " Paste from system clipboard
-nnoremap <leader>p <esc>"+gP<cr>
-" Compile file
-nnoremap <f8> <esc>:silent cd %:p:h<cr>:make<cr>
+nnoremap <c-p> "+gP<cr>
+inoremap <c-p> <c-r><c-o>+
 
 " Clear highlight from search
 nnoremap <leader>n :silent noh<cr>
+nnoremap <leader>/ :silent noh<cr>
 
-" Split window and switch to it
-nnoremap <leader>w <c-w>v<c-w>l
-nnoremap <leader>s <c-w>s<c-w>j
 " Close other windows
-nnoremap <leader>o <c-w>o
+nnoremap <leader>1 <c-w>o
+" Split window and switch to it
+nnoremap <leader>2 <c-w>s<c-w>j
+nnoremap <leader>3 <c-w>v<c-w>l
+" Close current window
+nnoremap <leader>4 <c-w>c
 
 " Easier navigation between split windows
 nnoremap <c-j> <c-w>j
@@ -113,23 +180,39 @@ nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
 
 " Strip trailing whitespaces
-nnoremap <leader>W <esc>:%s/\s\+$//<cr>:let @/=''<cr>
+nnoremap <leader>W :silent %s/\s\+$//<cr>:let @/=''<cr>
 
 " Open buffer explorer
-nnoremap <leader>b :silent CtrlPBuffer<cr>
+nnoremap <c-b> :silent CtrlPBuffer<cr>
+inoremap <c-b> <esc>:silent CtrlPBuffer<cr>
 
 " Map Control-Space to omnicompletion
 inoremap <c-space> <c-x><c-o>
 
 " Format selected text or paragraph with Q
-"vmap Q gq
-"nnoremap Q gqap
+vmap Q gq
+nnoremap Q gqap
+
+" Replace word under cursor
+"nnoremap <leader>s :%s/\<<C-r><C-w>\>/
+" Replace word under cursor globally by default
+nnoremap <leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+
+" Visual shifting (does not exit Visual mode)
+vnoremap < <gv
+vnoremap > >gv
+
+" Shift key fixes in command mode
+cnoremap W w
+cnoremap WQ wq
+cnoremap Wq wq
+cnoremap wQ wq
+cnoremap Q q
 
 " Use sudo to write file
-"cmap w!! w !sudo tee % >/dev/null
+cnoremap w!! w !sudo tee % >/dev/null
 
-" Also write file with W
-cmap W w
+" ----- PROGRAMMING -----
 
 " Auto completion: show menu
 set wildmenu
@@ -155,35 +238,27 @@ autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal nosmartindent
 
 " Strip trailing whitespace when saving a file
-autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :silent %s/\s\+$//e
 
 " Extended % pairs matching
 runtime macros/matchit.vim
 
-" Solarized colors
-"let g:solarized_termcolors=256
-
-" gVim options
-if has("gui_running") " Options for when GUI is present (gVim)
-  set guioptions-=r " Remove right scrollbar
-  set guioptions-=l " Remove left scrollbar
-  set guioptions-=R " Remove right scrollbar when window is split
-  set guioptions-=L " Remove left scrollbar when window is split
-  set guioptions-=T " Remove tool bar
-  "set guioptions-=m " Remove menu bar
-  set mousehide " Hide mouse when user starts typing
-  "colorscheme desert
-  colorscheme zenburn
-  if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
-      set guifont=Deja\ Vu\ Sans\ Mono\ 12
-  endif
-else " Options for when no GUI is present (console vim)
-  "colorscheme desert
-  colorscheme zenburn
-  "colorscheme solarized
-endif
-
 " ----- PLUGINS -----
+
+" CtrlP
+let g:ctrlp_map = '<c-f>'
+" Working path mode
+let g:ctrlp_working_path_mode = 'ra'
+" Don't clear cache on exit
+let g:ctrlp_clear_cache_on_exit=0
+" Add additional root markers
+let g:ctrlp_root_markers = ['composer.json', 'package.json']
+
+" Ignore these files and directories
+let g:ctrlp_custom_ignore = {
+            \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\cache*|\vendor$|\Downloads$|\Igre*|\Install',
+            \ 'file': '\v\.(exe|so|dll|pyc|zip|tar\.gz|tar\.bz2|pdf|doc|docx|odt|png|jpg|gif|xcf|swf|flv|mp3|mp4|mkv|torrent|jar)$',
+            \ }
 
 " NERDTree
 "let NERDTreeShowBookmarks=0
@@ -193,12 +268,7 @@ endif
 
 " Open NERDTree
 "nmap <leader>e :silent NERDTreeToggle<cr>:silent NERDTreeMirror<cr>
-"nmap <leader>e :silent NERDTreeToggle<cr>
-
-" Auto start NERDTree:
-"autocmd vimenter * NERDTree
-" Close vim when only NERDTree window left:
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+nmap <leader>e :silent NERDTreeToggle<cr>
 
 " Supertab
 let g:SupertabMappingForward = '<c-space>'
@@ -224,10 +294,6 @@ let g:tagbar_ctags_bin='~/.local/bin/ctags'
 
 " Change EasyMotion leader key - Default is <Leader><Leader>
 "let g:EasyMotion_leader_key = '<Leader>'
-
-" Yankstack
-let g:yankstack_map_keys = 0 " No default mapping for yankstack
-call yankstack#setup() " Setup yankstack plugin
 
 " Ctags executable file location
 let Tlist_Ctags_Cmd='~/.local/bin/ctags'
