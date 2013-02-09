@@ -46,6 +46,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 let g:pathogen_disabled = []
 "call add(g:pathogen_disabled, 'bufexplorer')
 "call add(g:pathogen_disabled, 'vim-powerline')
+call add(g:pathogen_disabled, 'auto-pairs')
 
 " Initialize pathogen
 call pathogen#infect() " Pathogen - do magic by setting up runtime paths
@@ -74,7 +75,7 @@ set nobackup " No backup files
 set noswapfile " No swap file, that thing is so 70s
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatibility
-set timeoutlen=750 " Set the timeout for mapped key combos in ms (default 1000)
+"set timeoutlen=750 " Set the timeout for mapped key combos in ms (default 1000)
 set history=1000 " Remember more commands and search history, like an elephant
 set undolevels=1000 " Use many muchos levels of undo
 set autoread " Automatically reload a file when change detected
@@ -119,13 +120,14 @@ if has("gui_running") " Options for when GUI is present (gVim)
     set guioptions-=R " Remove right scrollbar when window is split
     set guioptions-=L " Remove left scrollbar when window is split
     set guioptions-=T " Remove tool bar
-    "set guioptions-=m " Remove menu bar
+    set guioptions-=m " Remove menu bar
     set mousehide " Hide mouse when user starts typing
     "colorscheme desert
     "colorscheme zenburn
     colorscheme solarized
     if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
-        set guifont=Deja\ Vu\ Sans\ Mono\ 12
+        "set guifont=Deja\ Vu\ Sans\ Mono\ 12
+        set guifont=Monospace\ 12
     endif
 else " Options for when no GUI is present (console vim)
     "colorscheme desert
@@ -189,8 +191,10 @@ let g:mapleader=","
 " Faster browsing
 nnoremap <space> <C-f>
 nnoremap <s-space> <C-b>
+nnoremap <backspace> <C-b>
 vnoremap <space> <C-f>
 vnoremap <s-space> <C-b>
+vnoremap <backspace> <C-b>
 
 " More speed!
 nnoremap ; :
@@ -241,10 +245,10 @@ inoremap <c-space> <c-x><c-o>
 vmap Q gq
 nnoremap Q gqap
 
-" Replace word under cursor
-"nnoremap <leader>s :%s/\<<C-r><C-w>\>/
-" Replace word under cursor globally
-nnoremap <leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+" Replace word under cursor - on current line
+nnoremap <leader>sl :s/\<<C-r><C-w>\>/
+" Replace word under cursor - on all lines
+nnoremap <leader>sg :%s/\<<C-r><C-w>\>/
 
 " Visual shifting (does not exit Visual mode)
 vnoremap < <gv
@@ -267,12 +271,17 @@ nnoremap <c-n> :edit note:
 inoremap <c-n> <esc>:edit note:
 
 " Open buffer explorer
+nnoremap <leader>bb :silent CtrlPBuffer<cr>
 nnoremap <c-b> :silent CtrlPBuffer<cr>
 inoremap <c-b> <esc>:silent CtrlPBuffer<cr>
 
+" Open file explorer
+nnoremap <leader>f :silent CtrlP<cr>
+
 " Undo tree
-nnoremap <leader>u :UndotreeToggle<cr>
-nnoremap <c-u> :UndotreeToggle<cr>
+nnoremap <leader>u :silent UndotreeToggle<cr>
+nnoremap <c-u> :silent UndotreeToggle<cr>
+inoremap <c-u> <esc>:silent UndotreeToggle<cr>
 
 " ----- MISC -----
 
@@ -280,6 +289,9 @@ nnoremap <c-u> :UndotreeToggle<cr>
 runtime macros/matchit.vim
 
 " ----- PLUGINS -----
+
+" Disable auto-pairs keybind for <M-p> (conflict with yankstack)
+let g:AutoPairShortcutToggle = '' " why doesn't this work?
 
 " CtrlP
 let g:ctrlp_map = '<c-f>'
