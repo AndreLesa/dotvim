@@ -82,6 +82,9 @@ set autoread " Automatically reload a file when change detected
 set list " Show whitespace characters
 set listchars=tab:>-,trail:·,extends:# " Highlight problematic whitespace
 
+set splitbelow " Vertical splits go below instead of above
+set splitright " Horizontal splits go to the right instead of to the left
+
 " Strip trailing whitespace when saving a file
 autocmd BufWritePre * :silent %s/\s\+$//e
 
