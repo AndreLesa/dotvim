@@ -199,6 +199,17 @@ vnoremap <space> <C-f>
 vnoremap <s-space> <C-b>
 vnoremap <backspace> <C-b>
 
+" Split window
+nmap <leader>swh :topleft  vnew<cr>
+nmap <leader>swl :botright vnew<cr>
+nmap <leader>swk :topleft  new<cr>
+nmap <leader>swj :botright new<cr>
+" Split buffer
+nmap <leader>sbh :leftabove  vnew<cr>
+nmap <leader>sbl :rightbelow vnew<cr>
+nmap <leader>sbk :leftabove  new<cr>
+nmap <leader>sbj :rightbelow new<cr>
+
 " More speed!
 inoremap jj <esc>
 cnoremap jj <c-c><esc>
