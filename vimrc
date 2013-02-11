@@ -197,7 +197,6 @@ vnoremap <s-space> <C-b>
 vnoremap <backspace> <C-b>
 
 " More speed!
-nnoremap ; :
 inoremap jj <esc>
 cnoremap jj <c-c><esc>
 
