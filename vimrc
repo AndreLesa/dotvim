@@ -283,6 +283,11 @@ cnoremap w!! w !sudo tee % >/dev/null
 nnoremap <c-n> :edit note:
 inoremap <c-n> <esc>:edit note:
 
+" Comment lines
+inoremap <m-;> <c-o><leader>ci
+nnoremap <m-;> <leader>ci
+vnoremap <m-;> <leader>ci
+
 " Open buffer explorer
 nnoremap <leader>bb :silent CtrlPBuffer<cr>
 nnoremap <c-b> :silent CtrlPBuffer<cr>
