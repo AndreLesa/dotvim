@@ -45,7 +45,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 " Temporarily disabled plugins
 let g:pathogen_disabled = []
 "call add(g:pathogen_disabled, 'bufexplorer')
-"call add(g:pathogen_disabled, 'vim-powerline')
+call add(g:pathogen_disabled, 'vim-powerline')
 call add(g:pathogen_disabled, 'auto-pairs')
 
 " Initialize pathogen

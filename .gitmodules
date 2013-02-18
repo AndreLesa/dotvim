@@ -83,9 +83,6 @@
 [submodule "bundle/vimux"]
 	path = bundle/vimux
 	url = https://github.com/benmills/vimux.git
-[submodule "bundle/vim-symfony"]
-	path = bundle/vim-symfony
-	url = https://github.com/docteurklein/vim-symfony.git
 [submodule "bundle/auto-pairs"]
 	path = bundle/auto-pairs
 	url = https://github.com/jiangmiao/auto-pairs.git
