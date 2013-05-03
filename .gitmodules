@@ -101,3 +101,9 @@
 [submodule "bundle/vim-haml"]
 	path = bundle/vim-haml
 	url = https://github.com/tpope/vim-haml.git
+[submodule "bundle/ycm"]
+	path = bundle/ycm
+	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "bundle/python-mode"]
+	path = bundle/python-mode
+	url = https://github.com/klen/python-mode

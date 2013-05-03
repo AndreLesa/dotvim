@@ -45,8 +45,12 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 " Temporarily disabled plugins
 let g:pathogen_disabled = []
 "call add(g:pathogen_disabled, 'bufexplorer')
-call add(g:pathogen_disabled, 'vim-powerline')
+"call add(g:pathogen_disabled, 'vim-powerline')
+call add(g:pathogen_disabled, 'nerdtree')
 call add(g:pathogen_disabled, 'auto-pairs')
+call add(g:pathogen_disabled, 'csapprox')
+"call add(g:pathogen_disabled, 'supertab')
+call add(g:pathogen_disabled, 'ycm')
 
 " Initialize pathogen
 call pathogen#infect() " Pathogen - do magic by setting up runtime paths
@@ -70,9 +74,11 @@ set showmode " Always show current mode
 set ls=2 " Always show status line
 set hidden " Enable multiple buffers open
 set scrolloff=3 " Maintain more context around cursor when scrolling
-set nofoldenable " Don't fold code
+set foldmethod=indent " Fold method
+set foldlevel=99 " Fold level
+"set nofoldenable " Don't fold code
 set nobackup " No backup files
-set noswapfile " No swap file, that thing is so 70s
+set noswapfile " No swap file, that is so 70s
 set backspace=indent,eol,start " Allow backspacing over everything in insert mode
 set viewoptions=folds,options,cursor,unix,slash " Better Unix/Windows compatibility
 "set timeoutlen=750 " Set the timeout for mapped key combos in ms (default 1000)
@@ -111,7 +117,7 @@ set tags=./tags;/ " search current dir, then up recursively until root
 " ----- UI, COLORS AND STUFF -----
 
 " Solarized colors
-"let g:solarized_termcolors=256
+let g:solarized_termcolors=16 " For use with solarized terminal color palette
 
 " Toggle background color for solarized
 call togglebg#map("<F4>")
@@ -135,7 +141,7 @@ if has("gui_running") " Options for when GUI is present (gVim)
 else " Options for when no GUI is present (console vim)
     "colorscheme desert
     "colorscheme zenburn
-    "colorscheme solarized
+    colorscheme solarized
 endif
 
 " ----- CODING -----
@@ -217,6 +223,8 @@ cnoremap jj <c-c><esc>
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
 nnoremap k gk
+vnoremap j gj
+vnoremap k gk
 
 " Y will yank from the cursor to the end of the line, to be consistent with C and D.
 nnoremap Y y$
@@ -269,9 +277,6 @@ vnoremap > >gv
 
 " Shift key fixes in command mode
 cnoremap W w
-cnoremap WQ wq
-cnoremap Wq wq
-cnoremap wQ wq
 cnoremap Q q
 
 " Use sudo to write file
@@ -305,6 +310,10 @@ inoremap <c-u> <esc>:silent UndotreeToggle<cr>
 
 " Extended % pairs matching
 runtime macros/matchit.vim
+
+" Close autocomplete preview window
+autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
 " ----- PLUGINS -----
 
@@ -347,6 +356,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " Supertab
 let g:SupertabMappingForward = '<c-space>'
 let g:SupertabMappingBackward = '<s-c-space>'
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>" " omnicomplete
+let g:SuperTabDefaultCompletionType = "context" " smartass
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Vim Notes
 let g:notes_directory = $HOME . "/.vim/notes"
@@ -368,6 +380,3 @@ let g:tagbar_ctags_bin='~/.local/bin/ctags'
 
 " Change EasyMotion leader key - Default is <Leader><Leader>
 "let g:EasyMotion_leader_key = '<Leader>'
-
-" Ctags executable file location
-let Tlist_Ctags_Cmd='~/.local/bin/ctags'
