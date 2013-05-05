@@ -46,7 +46,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 let g:pathogen_disabled = []
 "call add(g:pathogen_disabled, 'bufexplorer')
 "call add(g:pathogen_disabled, 'vim-powerline')
-call add(g:pathogen_disabled, 'nerdtree')
+"call add(g:pathogen_disabled, 'nerdtree')
 call add(g:pathogen_disabled, 'auto-pairs')
 call add(g:pathogen_disabled, 'csapprox')
 "call add(g:pathogen_disabled, 'supertab')
@@ -67,7 +67,8 @@ set shortmess=at " Be less verbose
 "set cursorline " Highlight current line
 "set visualbell " Don't beep, blink instead
 set noerrorbells " Don't beep, don't you even blink
-set t_Co=256 " Use 256 colors in terminal
+"set t_Co=256 " Use 256 colors in terminal
+"set t_ut= " No background color erase
 set ruler " Show cursor position at all times
 set showcmd " Show incomplete commands
 set showmode " Always show current mode
@@ -115,6 +116,13 @@ set wildmode=longest:full
 set tags=./tags;/ " search current dir, then up recursively until root
 
 " ----- UI, COLORS AND STUFF -----
+
+if &term =~ '256color'
+" Disable Background Color Erase (BCE) so that color schemes
+" work properly when Vim is used inside tmux and GNU screen.
+" See also http://snk.tuxfamily.org/log/vim-256color-bce.html
+  set t_ut=
+endif
 
 " Solarized colors
 let g:solarized_termcolors=16 " For use with solarized terminal color palette
@@ -380,6 +388,10 @@ let g:tagbar_ctags_bin='~/.local/bin/ctags'
 
 " Change EasyMotion leader key - Default is <Leader><Leader>
 "let g:EasyMotion_leader_key = '<Leader>'
+
+" Jedi vim
+let g:jedi#auto_vim_configuration = 0 " don't set vim opts
+let g:jedi#use_tabs_not_buffers = 0 " buffers baby, it's all about buffers
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
