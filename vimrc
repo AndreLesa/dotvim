@@ -389,6 +389,11 @@ let g:tagbar_ctags_bin='~/.local/bin/ctags'
 " Change EasyMotion leader key - Default is <Leader><Leader>
 "let g:EasyMotion_leader_key = '<Leader>'
 
+" Javascript plugin
+let g:html_indent_inctags = "html,body,head,tbody"
+let g:html_indent_script1 = "inc"
+let g:html_indent_style1 = "inc"
+
 " Jedi vim
 let g:jedi#auto_vim_configuration = 0 " don't set vim opts
 let g:jedi#use_tabs_not_buffers = 0 " buffers baby, it's all about buffers
