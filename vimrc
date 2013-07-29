@@ -23,7 +23,6 @@ endfunction
 call EnsureDirExists($HOME . '/.vim/backup')
 call EnsureDirExists($HOME . '/.vim/sessions')
 call EnsureDirExists($HOME . '/.vim/undo')
-call EnsureDirExists($HOME . '/.vim/notes')
 
 " Keep all backups in a single directory
 if isdirectory($HOME . '/.vim/backup')
@@ -45,11 +44,11 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 " Temporarily disabled plugins
 let g:pathogen_disabled = []
 "call add(g:pathogen_disabled, 'bufexplorer')
-"call add(g:pathogen_disabled, 'vim-powerline')
 "call add(g:pathogen_disabled, 'nerdtree')
+"call add(g:pathogen_disabled, 'supertab')
+"call add(g:pathogen_disabled, 'syntastic')
 call add(g:pathogen_disabled, 'auto-pairs')
 call add(g:pathogen_disabled, 'csapprox')
-"call add(g:pathogen_disabled, 'supertab')
 call add(g:pathogen_disabled, 'ycm')
 
 " Initialize pathogen
@@ -149,7 +148,7 @@ if has("gui_running") " Options for when GUI is present (gVim)
 else " Options for when no GUI is present (console vim)
     "colorscheme desert
     "colorscheme zenburn
-    colorscheme solarized
+    "colorscheme solarized
 endif
 
 " ----- CODING -----
@@ -187,6 +186,7 @@ autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal softtabstop=4
 autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal nosmartindent
+autocmd FileType python setlocal nu! " Why is this needed??!
 
 " Html indenting rules
 autocmd FileType xml,html,html.twig setlocal tabstop=2
@@ -205,7 +205,7 @@ autocmd FileType javascript setlocal shiftwidth=2
 "Set mapleader key
 let g:mapleader=","
 
-" Faster browsing
+" Faster browsing/scrolling
 nnoremap <space> <C-f>
 nnoremap <s-space> <C-b>
 nnoremap <backspace> <C-b>
@@ -344,16 +344,22 @@ let g:ctrlp_custom_ignore = {
             \ }
 
 " Syntastic
+" Check on buffer open
+let g:syntastic_check_on_open=1
+" No syntax highlighting
+"let g:syntastic_enable_highlighting = 0
+" No errors buffer please
+let g:syntastic_auto_loc_list=0
+let g:syntastic_always_populate_loc_list=0
+" Modemaps for filetypes
 let g:syntastic_mode_map = { 'mode': 'active',
             \ 'active_filetypes': [],
             \ 'passive_filetypes': ['html', 'html.twig'] }
 
-" NERDTree
-"let NERDTreeShowBookmarks=0
-"let NERDTreeQuitOnOpen=1
-"let NERDTreeKeepTreeInNewTab=1
-"let NERDTreeChDirMode=0
+" Python checker
+let g:syntastic_python_checkers=['flake8']
 
+" NERDTree
 " Open NERDTree
 "nmap <leader>e :silent NERDTreeToggle<cr>:silent NERDTreeMirror<cr>
 nmap <leader>e :silent NERDTreeToggle<cr>
@@ -380,9 +386,6 @@ let g:UltiSnipsDontReverseSearchPath="1"
 " Zencoding keymap
 let g:user_zen_expandabbr_key='<C-e>'
 
-" Powerline file path style
-let g:Powerline_stl_path_style = 'filename'
-
 " Tagbar ctags executable
 let g:tagbar_ctags_bin='~/.local/bin/ctags'
 
@@ -395,8 +398,8 @@ let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
 " Jedi vim
-let g:jedi#auto_vim_configuration = 0 " don't set vim opts
-let g:jedi#use_tabs_not_buffers = 0 " buffers baby, it's all about buffers
+"let g:jedi#auto_vim_configuration = 0 " don't set vim opts
+"let g:jedi#use_tabs_not_buffers = 0 " buffers baby, it's all about buffers
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
