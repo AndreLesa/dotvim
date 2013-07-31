@@ -343,22 +343,6 @@ let g:ctrlp_custom_ignore = {
             \ 'file': '\v\.(exe|so|dll|pyc|zip|tar\.gz|tar\.bz2|pdf|doc|docx|odt|png|jpg|gif|xcf|swf|flv|mp3|mp4|mkv|torrent|jar)$',
             \ }
 
-" Syntastic
-" Check on buffer open
-let g:syntastic_check_on_open=1
-" No syntax highlighting
-"let g:syntastic_enable_highlighting = 0
-" No errors buffer please
-let g:syntastic_auto_loc_list=0
-let g:syntastic_always_populate_loc_list=0
-" Modemaps for filetypes
-let g:syntastic_mode_map = { 'mode': 'active',
-            \ 'active_filetypes': [],
-            \ 'passive_filetypes': ['html', 'html.twig'] }
-
-" Python checker
-let g:syntastic_python_checkers=['flake8']
-
 " NERDTree
 " Open NERDTree
 "nmap <leader>e :silent NERDTreeToggle<cr>:silent NERDTreeMirror<cr>
@@ -397,9 +381,30 @@ let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
 
+let g:syntastic_auto_loc_list=2
+
 " Jedi vim
 "let g:jedi#auto_vim_configuration = 0 " don't set vim opts
 "let g:jedi#use_tabs_not_buffers = 0 " buffers baby, it's all about buffers
+
+" Syntastic
+" Check on buffer open
+let g:syntastic_check_on_open=1
+" No syntax highlighting
+"let g:syntastic_enable_highlighting = 0
+" Jump to first error on checking
+let g:syntastic_auto_jump=0
+" Modemaps for filetypes
+let g:syntastic_mode_map = { 'mode': 'active',
+            \ 'active_filetypes': [],
+            \ 'passive_filetypes': ['html', 'html.twig'] }
+
+" Python checker
+let g:syntastic_python_checkers=['flake8']
+
+" No errors buffer please
+let g:syntastic_auto_loc_list=2
+let g:syntastic_always_populate_loc_list=0
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
