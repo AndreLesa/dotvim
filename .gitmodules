@@ -34,10 +34,6 @@
 	path = bundle/vim-easymotion
 	url = https://github.com/Lokaltog/vim-easymotion.git
     ignore = dirty
-[submodule "bundle/zencoding-vim"]
-	path = bundle/zencoding-vim
-	url = https://github.com/mattn/zencoding-vim.git
-    ignore = dirty
 [submodule "bundle/vim-repeat"]
 	path = bundle/vim-repeat
 	url = https://github.com/tpope/vim-repeat.git
@@ -100,9 +96,6 @@
 [submodule "bundle/ycm"]
 	path = bundle/ycm
 	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule "bundle/python-mode"]
-	path = bundle/python-mode
-	url = https://github.com/klen/python-mode
 [submodule "bundle/vim-airline"]
 	path = bundle/vim-airline
 	url = https://github.com/bling/vim-airline
