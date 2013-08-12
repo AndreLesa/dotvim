@@ -126,9 +126,6 @@ endif
 " Solarized colors
 let g:solarized_termcolors=16 " For use with solarized terminal color palette
 
-" Toggle background color for solarized
-call togglebg#map("<F4>")
-
 " gVim options
 if has("gui_running") " Options for when GUI is present (gVim)
     set guioptions-=r " Remove right scrollbar
@@ -186,7 +183,6 @@ autocmd FileType python setlocal tabstop=4
 autocmd FileType python setlocal softtabstop=4
 autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal nosmartindent
-autocmd FileType python setlocal nu! " Why is this needed??!
 
 " Html indenting rules
 autocmd FileType xml,html,html.twig setlocal tabstop=2
@@ -405,6 +401,11 @@ let g:syntastic_python_checkers=['flake8']
 " No errors buffer please
 let g:syntastic_auto_loc_list=2
 let g:syntastic_always_populate_loc_list=0
+
+" Vim airline
+let g:airline_enable_branch=1
+let g:airline_branch_empty_message=''
+let g:airline_enable_syntastic=1
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
