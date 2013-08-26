@@ -279,10 +279,6 @@ nnoremap <leader>sg :%s/\<<C-r><C-w>\>/
 vnoremap < <gv
 vnoremap > >gv
 
-" Shift key fixes in command mode
-cnoremap W w
-cnoremap Q q
-
 " Use sudo to write file
 cnoremap w!! w !sudo tee % >/dev/null
 
