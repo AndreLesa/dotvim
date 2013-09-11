@@ -43,11 +43,6 @@ endif
 runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 " Temporarily disabled plugins
 let g:pathogen_disabled = []
-"call add(g:pathogen_disabled, 'bufexplorer')
-"call add(g:pathogen_disabled, 'nerdtree')
-"call add(g:pathogen_disabled, 'supertab')
-"call add(g:pathogen_disabled, 'syntastic')
-call add(g:pathogen_disabled, 'auto-pairs')
 call add(g:pathogen_disabled, 'csapprox')
 call add(g:pathogen_disabled, 'ycm')
 
@@ -145,7 +140,7 @@ if has("gui_running") " Options for when GUI is present (gVim)
 else " Options for when no GUI is present (console vim)
     "colorscheme desert
     "colorscheme zenburn
-    "colorscheme solarized
+    colorscheme solarized
 endif
 
 " ----- CODING -----
@@ -188,11 +183,16 @@ autocmd FileType python setlocal nosmartindent
 autocmd FileType xml,html,html.twig setlocal tabstop=2
 autocmd FileType xml,html,html.twig setlocal softtabstop=2
 autocmd FileType xml,html,html.twig setlocal shiftwidth=2
+autocmd FileType xml,html,html.twig setlocal expandtab
 
 " Javascript indenting rules
-autocmd FileType javascript setlocal tabstop=2
-autocmd FileType javascript setlocal softtabstop=2
-autocmd FileType javascript setlocal shiftwidth=2
+autocmd FileType javascript setlocal tabstop=4
+autocmd FileType javascript setlocal softtabstop=4
+autocmd FileType javascript setlocal shiftwidth=4
+autocmd FileType javascript setlocal expandtab
+
+" Set .mak files to mako filetype
+au BufRead,BufNewFile *.mak set filetype=mako
 
 " ------ FUNCTIONS -----
 
@@ -235,6 +235,9 @@ nnoremap Y y$
 
 " Delete buffer
 nnoremap <leader>k :bw<cr>
+
+" Insert linebreak from normal mode
+nnoremap <cr> i<cr><Esc>
 
 " Paste from system clipboard
 nnoremap <c-p> "+gP<cr>
@@ -375,10 +378,6 @@ let g:html_indent_style1 = "inc"
 
 let g:syntastic_auto_loc_list=2
 
-" Jedi vim
-"let g:jedi#auto_vim_configuration = 0 " don't set vim opts
-"let g:jedi#use_tabs_not_buffers = 0 " buffers baby, it's all about buffers
-
 " Syntastic
 " Check on buffer open
 let g:syntastic_check_on_open=1
@@ -389,7 +388,7 @@ let g:syntastic_auto_jump=0
 " Modemaps for filetypes
 let g:syntastic_mode_map = { 'mode': 'active',
             \ 'active_filetypes': [],
-            \ 'passive_filetypes': ['html', 'html.twig'] }
+            \ 'passive_filetypes': ['html.twig'] }
 
 " Python checker
 let g:syntastic_python_checkers=['flake8']
