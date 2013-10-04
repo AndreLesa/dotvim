@@ -1,7 +1,12 @@
-" ----- FIRST THINGS FIRST -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" First thing's first
+""""""""""""""""""""""""""""""""""""""""""""""
+
 set nocompatible " No old school compatability
 
-" ----- DIRECTORIES -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Directories
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " On Windows, also use '.vim' instead of 'vimfiles'
 if has('win32') || has('win64')
@@ -37,7 +42,9 @@ if isdirectory($HOME . '/.vim/undo')
     endif
 endif
 
-" ----- PLUGINS -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Plugins
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " Pathogen - easier management of vim plugins
 runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
@@ -45,6 +52,7 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 let g:pathogen_disabled = []
 call add(g:pathogen_disabled, 'csapprox')
 call add(g:pathogen_disabled, 'ycm')
+call add(g:pathogen_disabled, 'auto-pairs')
 
 " Initialize pathogen
 call pathogen#infect() " Pathogen - do magic by setting up runtime paths
@@ -52,7 +60,9 @@ call pathogen#helptags() " Pathogen - generate help tags
 " Initialize other plugins
 call yankstack#setup() " Setup yankstack plugin
 
-" ----- VIM OPTIONS -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Vim options
+""""""""""""""""""""""""""""""""""""""""""""""
 
 set encoding=utf-8 " Default encoding utf-8
 set title " Update terminal title
@@ -109,7 +119,9 @@ set wildmode=longest:full
 "set tags=./tags,tags;$HOME " search current dir, then up recursively until $HOME
 set tags=./tags;/ " search current dir, then up recursively until root
 
-" ----- UI, COLORS AND STUFF -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Look and feel
+""""""""""""""""""""""""""""""""""""""""""""""
 
 if &term =~ '256color'
 " Disable Background Color Erase (BCE) so that color schemes
@@ -143,7 +155,9 @@ else " Options for when no GUI is present (console vim)
     colorscheme solarized
 endif
 
-" ----- CODING -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Programming
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " General tab options
 set tabstop=4
@@ -194,9 +208,13 @@ autocmd FileType javascript setlocal expandtab
 " Set .mak files to mako filetype
 au BufRead,BufNewFile *.mak set filetype=mako
 
-" ------ FUNCTIONS -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Functions
+""""""""""""""""""""""""""""""""""""""""""""""
 
-" ------ KEYBINDINGS -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Keybinds
+""""""""""""""""""""""""""""""""""""""""""""""
 
 "Set mapleader key
 let g:mapleader=","
@@ -285,7 +303,12 @@ vnoremap > >gv
 " Use sudo to write file
 cnoremap w!! w !sudo tee % >/dev/null
 
-" ----- PLUGIN KEYBINDINGS -----
+" Edit files relative to current file
+cnoremap red edit <c-r>=expand("%:p:h")<cr>/
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Keybinds
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " Open a note
 nnoremap <c-n> :edit note:
@@ -309,7 +332,9 @@ nnoremap <leader>u :silent UndotreeToggle<cr>
 nnoremap <c-u> :silent UndotreeToggle<cr>
 inoremap <c-u> <esc>:silent UndotreeToggle<cr>
 
-" ----- MISC -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Misc
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " Extended % pairs matching
 runtime macros/matchit.vim
@@ -318,7 +343,9 @@ runtime macros/matchit.vim
 autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 
-" ----- PLUGINS -----
+""""""""""""""""""""""""""""""""""""""""""""""
+" Keybinds
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " Disable auto-pairs keybind for <M-p> (conflict with yankstack)
 let g:AutoPairShortcutToggle = '' " why doesn't this work?
@@ -401,6 +428,10 @@ let g:syntastic_always_populate_loc_list=0
 let g:airline_enable_branch=1
 let g:airline_branch_empty_message=''
 let g:airline_enable_syntastic=1
+
+""""""""""""""""""""""""""""""""""""""""""""""
+" Python virtual env
+""""""""""""""""""""""""""""""""""""""""""""""
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
