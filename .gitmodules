@@ -105,3 +105,6 @@
 [submodule "bundle/vim-bufferline"]
 	path = bundle/vim-bufferline
 	url = https://github.com/bling/vim-bufferline
+[submodule "bundle/vim-multiple-cursors"]
+	path = bundle/vim-multiple-cursors
+	url = https://github.com/terryma/vim-multiple-cursors
