@@ -43,7 +43,7 @@ if isdirectory($HOME . '/.vim/undo')
 endif
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" Plugins
+" Plugins initialization
 """"""""""""""""""""""""""""""""""""""""""""""
 
 " Pathogen - easier management of vim plugins
@@ -67,16 +67,6 @@ call yankstack#setup() " Setup yankstack plugin
 set encoding=utf-8 " Default encoding utf-8
 set title " Update terminal title
 set shortmess=at " Be less verbose
-"set number " Show line numbers
-"set cursorline " Highlight current line
-"set visualbell " Don't beep, blink instead
-set noerrorbells " Don't beep, don't you even blink
-"set t_Co=256 " Use 256 colors in terminal
-"set t_ut= " No background color erase
-set ruler " Show cursor position at all times
-set showcmd " Show incomplete commands
-set showmode " Always show current mode
-set ls=2 " Always show status line
 set hidden " Enable multiple buffers open
 set scrolloff=3 " Maintain more context around cursor when scrolling
 set foldmethod=indent " Fold method
@@ -115,13 +105,22 @@ set wrapscan " Make search wrap around
 set wildmenu
 set wildmode=longest:full
 
-" Tags
-"set tags=./tags,tags;$HOME " search current dir, then up recursively until $HOME
-set tags=./tags;/ " search current dir, then up recursively until root
+" Tags - search cwd, then up recursively until root
+set tags=./tags;/
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Look and feel
 """"""""""""""""""""""""""""""""""""""""""""""
+
+"set t_Co=256 " Use 256 colors in terminal
+"set number " Show line numbers
+"set cursorline " Highlight current line
+"set visualbell " Don't beep, blink instead
+set noerrorbells " Don't beep, don't you even blink
+set ruler " Show cursor position at all times
+set showcmd " Show incomplete commands
+set showmode " Always show current mode
+set ls=2 " Always show status line
 
 if &term =~ '256color'
 " Disable Background Color Erase (BCE) so that color schemes
@@ -142,16 +141,12 @@ if has("gui_running") " Options for when GUI is present (gVim)
     set guioptions-=T " Remove tool bar
     set guioptions-=m " Remove menu bar
     set mousehide " Hide mouse when user starts typing
-    "colorscheme desert
-    "colorscheme zenburn
     colorscheme solarized
     if has("gui_gtk2") " Options for when GUI is gtk2 (Linux)
         "set guifont=Deja\ Vu\ Sans\ Mono\ 12
         set guifont=Monospace\ 12
     endif
 else " Options for when no GUI is present (console vim)
-    "colorscheme desert
-    "colorscheme zenburn
     colorscheme solarized
 endif
 
@@ -209,10 +204,6 @@ autocmd FileType javascript setlocal expandtab
 au BufRead,BufNewFile *.mak set filetype=mako
 
 """"""""""""""""""""""""""""""""""""""""""""""
-" Functions
-""""""""""""""""""""""""""""""""""""""""""""""
-
-""""""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
 """"""""""""""""""""""""""""""""""""""""""""""
 
@@ -254,16 +245,11 @@ nnoremap Y y$
 " Delete buffer
 nnoremap <leader>k :bw<cr>
 
-" Insert linebreak from normal mode
-nnoremap <cr> i<cr><Esc>
-
 " Paste from system clipboard
-nnoremap <c-p> "+gP<cr>
-inoremap <c-p> <c-r><c-o>+
+nnoremap <leader>p "+gP<cr>
 
 " Clear highlight from search
-nnoremap <leader>n :silent noh<cr>
-nnoremap <leader>/ :silent noh<cr>
+nnoremap <return> :silent noh<cr>
 
 " Close other windows
 nnoremap <leader>1 <c-w>o
@@ -304,15 +290,14 @@ vnoremap > >gv
 cnoremap w!! w !sudo tee % >/dev/null
 
 " Edit files relative to current file
-cnoremap red edit <c-r>=expand("%:p:h")<cr>/
+cnoremap %% edit <c-r>=expand("%:p:h")<cr>/
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Plugin Keybinds
 """"""""""""""""""""""""""""""""""""""""""""""
 
 " Open a note
-nnoremap <c-n> :edit note:
-inoremap <c-n> <esc>:edit note:
+nnoremap <leader>n :edit note:
 
 " Comment lines
 inoremap <m-;> <c-o><leader>ci
@@ -348,7 +333,7 @@ autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 """"""""""""""""""""""""""""""""""""""""""""""
 
 " Disable auto-pairs keybind for <M-p> (conflict with yankstack)
-let g:AutoPairShortcutToggle = '' " why doesn't this work?
+"let g:AutoPairShortcutToggle = '' " why doesn't this work?
 
 " CtrlP
 let g:ctrlp_map = '<c-f>'
@@ -388,9 +373,6 @@ set runtimepath+=~/.vim/snippets/
 "let g:UltiSnipsSnippetDirectories = ["UltiSnips", "snippets"]
 " Don't reverse directory lookup
 let g:UltiSnipsDontReverseSearchPath="1"
-
-" Zencoding keymap
-let g:user_zen_expandabbr_key='<C-e>'
 
 " Tagbar ctags executable
 let g:tagbar_ctags_bin='~/.local/bin/ctags'
