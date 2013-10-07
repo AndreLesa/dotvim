@@ -290,7 +290,7 @@ vnoremap > >gv
 cnoremap w!! w !sudo tee % >/dev/null
 
 " Edit files relative to current file
-cnoremap %% edit <c-r>=expand("%:p:h")<cr>/
+cnoremap %% <c-r>=expand("%:p:h")<cr>/
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Plugin Keybinds
@@ -305,7 +305,7 @@ nnoremap <m-;> <leader>ci
 vnoremap <m-;> <leader>ci
 
 " Open buffer explorer
-nnoremap <leader>bb :silent CtrlPBuffer<cr>
+nnoremap <leader>b :silent CtrlPBuffer<cr>
 nnoremap <c-b> :silent CtrlPBuffer<cr>
 inoremap <c-b> <esc>:silent CtrlPBuffer<cr>
 
