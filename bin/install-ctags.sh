@@ -2,9 +2,10 @@
 VIM_DIRECTORY="$HOME/.vim"
 CTAGS_VERSION="5.8"
 
-# Compile ctags
 CTAGS_SOURCE_DIR="$VIM_DIRECTORY/bin/ctags/install/source"
 CTAGS_SOURCE_FILE="ctags-$CTAGS_VERSION.tar.gz"
+
+# Compile ctags
 cd $CTAGS_SOURCE_DIR
 if [[ ! -d "$VIM_DIRECTORY/tmp/ctags-install" ]]; then
     mkdir -p "$VIM_DIRECTORY/tmp/ctags-install"
