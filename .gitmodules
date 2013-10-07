@@ -71,9 +71,6 @@
 [submodule "bundle/vimux"]
     path = bundle/vimux
     url = https://github.com/benmills/vimux.git
-[submodule "bundle/auto-pairs"]
-    path = bundle/auto-pairs
-    url = https://github.com/jiangmiao/auto-pairs.git
 [submodule "bundle/undotree"]
     path = bundle/undotree
     url = https://github.com/mbbill/undotree.git
@@ -98,9 +95,6 @@
 [submodule "bundle/vim-python-pep8-indent"]
     path = bundle/vim-python-pep8-indent
     url = https://github.com/hynek/vim-python-pep8-indent.git
-[submodule "bundle/vim-bufferline"]
-    path = bundle/vim-bufferline
-    url = https://github.com/bling/vim-bufferline
 [submodule "bundle/vim-multiple-cursors"]
     path = bundle/vim-multiple-cursors
     url = https://github.com/terryma/vim-multiple-cursors
