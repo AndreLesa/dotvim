@@ -103,5 +103,5 @@
     path = bundle/tcomment
     url = https://github.com/tomtom/tcomment_vim
 [submodule "bundle/emmet"]
-	path = bundle/emmet
-	url = http://github.com/mattn/emmet-vim.git
+    path = bundle/emmet
+    url = http://github.com/mattn/emmet-vim.git

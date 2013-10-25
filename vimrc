@@ -13,6 +13,13 @@ if has('win32') || has('win64')
     set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
 endif
 
+" Sync with system clipboard
+if has('win32') || has('win64')
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
+
 " Make directory if it doesn't exist
 function! EnsureDirExists (dir)
     if !isdirectory(a:dir)
@@ -189,10 +196,10 @@ autocmd FileType python setlocal shiftwidth=4
 autocmd FileType python setlocal nosmartindent
 
 " Html indenting rules
-autocmd FileType xml,html,html.twig setlocal tabstop=2
-autocmd FileType xml,html,html.twig setlocal softtabstop=2
-autocmd FileType xml,html,html.twig setlocal shiftwidth=2
-autocmd FileType xml,html,html.twig setlocal expandtab
+autocmd FileType xml,html,html.twig,mako setlocal tabstop=2
+autocmd FileType xml,html,html.twig,mako setlocal softtabstop=2
+autocmd FileType xml,html,html.twig,mako setlocal shiftwidth=2
+autocmd FileType xml,html,html.twig,mako setlocal expandtab
 
 " Javascript indenting rules
 autocmd FileType javascript setlocal tabstop=4
