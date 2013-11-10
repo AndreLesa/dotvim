@@ -105,3 +105,6 @@
 [submodule "bundle/emmet"]
     path = bundle/emmet
     url = http://github.com/mattn/emmet-vim.git
+[submodule "bundle/vim-blade"]
+	path = bundle/vim-blade
+	url = git://github.com/xsbeats/vim-blade.git
