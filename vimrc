@@ -434,3 +434,9 @@ if 'VIRTUAL_ENV' in os.environ:
     execfile(activate_this, dict(__file__=activate_this))
 EOF
 endif
+
+" Don't set terminal background color, assume terminal pallette is optimized
+" for solarized. This way we can have transparent background.
+" if !has("gui_running")
+"     hi Normal ctermbg=none
+" endif
