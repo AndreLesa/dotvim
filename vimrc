@@ -58,7 +58,6 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 " Temporarily disabled plugins
 let g:pathogen_disabled = []
 call add(g:pathogen_disabled, 'csapprox')
-call add(g:pathogen_disabled, 'ycm')
 call add(g:pathogen_disabled, 'auto-pairs')
 
 " Initialize pathogen
