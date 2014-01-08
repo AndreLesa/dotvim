@@ -238,6 +238,7 @@ nmap <leader>sbj :rightbelow new<cr>
 " More speed!
 inoremap jj <esc>
 cnoremap jj <c-c><esc>
+nnoremap ; :
 
 " j and k move over rows in the editor, instead of lines of text
 nnoremap j gj
