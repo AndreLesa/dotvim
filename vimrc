@@ -66,6 +66,9 @@ call pathogen#helptags() " Pathogen - generate help tags
 " Initialize other plugins
 call yankstack#setup() " Setup yankstack plugin
 
+" Initialize solarized background switch
+call togglebg#map("")
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " Vim options
 """"""""""""""""""""""""""""""""""""""""""""""
