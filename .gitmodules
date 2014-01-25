@@ -114,3 +114,9 @@
 [submodule "bundle/golden-view"]
 	path = bundle/golden-view
 	url = https://github.com/zhaocai/GoldenView.Vim
+[submodule "bundle/vim-expand-region"]
+	path = bundle/vim-expand-region
+	url = https://github.com/terryma/vim-expand-region
+[submodule "bundle/vim-sneak"]
+	path = bundle/vim-sneak
+	url = https://github.com/justinmk/vim-sneak
