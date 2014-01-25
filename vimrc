@@ -324,6 +324,11 @@ nnoremap <leader>u :silent UndotreeToggle<cr>
 nnoremap <c-u> :silent UndotreeToggle<cr>
 inoremap <c-u> <esc>:silent UndotreeToggle<cr>
 
+
+" Golden view split
+let g:goldenview__enable_default_mapping = 0
+nmap <silent> <c-g> <Plug>GoldenViewSplit
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " Misc
 """"""""""""""""""""""""""""""""""""""""""""""
