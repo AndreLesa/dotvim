@@ -111,3 +111,6 @@
 [submodule "bundle/unite"]
 	path = bundle/unite
 	url = https://github.com/Shougo/unite.vim.git
+[submodule "bundle/golden-view"]
+	path = bundle/golden-view
+	url = https://github.com/zhaocai/GoldenView.Vim
