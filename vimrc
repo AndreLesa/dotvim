@@ -108,6 +108,15 @@ set incsearch " Incremental search
 set hlsearch " Highlight search results
 set wrapscan " Make search wrap around
 
+" Wildignore
+" Ignore git repository directory
+set wildignore=*/.git/*
+" Ignore backup files
+set wildignore+=*~
+" Ignore compiled files
+set wildignore+=*.o
+set wildignore+=*.pyc
+
 " Auto completion: show menu
 set wildmenu
 set wildmode=longest:full
