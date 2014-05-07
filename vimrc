@@ -324,7 +324,6 @@ nnoremap <leader>u :silent UndotreeToggle<cr>
 nnoremap <c-u> :silent UndotreeToggle<cr>
 inoremap <c-u> <esc>:silent UndotreeToggle<cr>
 
-
 " Golden view split
 let g:goldenview__enable_default_mapping = 0
 nmap <silent> <c-g> <Plug>GoldenViewSplit
@@ -339,6 +338,9 @@ runtime macros/matchit.vim
 " Close autocomplete preview window
 autocmd CursorMovedI *  if pumvisible() == 0|silent! pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
+
+" Jump to last known position in file
+:au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
@@ -431,6 +433,7 @@ let g:startify_change_to_vcs_root = 1
 " Don't change to file directory when opening file (This sounds to me like the
 " problematic autocmd option - why is it enabled by default?)
 let g:startify_change_to_dir = 0
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " Python virtual env
 """"""""""""""""""""""""""""""""""""""""""""""
