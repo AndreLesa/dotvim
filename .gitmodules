@@ -103,23 +103,25 @@
     path = bundle/emmet
     url = http://github.com/mattn/emmet-vim.git
 [submodule "bundle/vim-blade"]
-	path = bundle/vim-blade
-	url = git://github.com/xsbeats/vim-blade.git
+    path = bundle/vim-blade
+    url = git://github.com/xsbeats/vim-blade.git
 [submodule "bundle/gitv"]
-	path = bundle/gitv
-	url = https://github.com/gregsexton/gitv.git
-[submodule "bundle/unite"]
-	path = bundle/unite
-	url = https://github.com/Shougo/unite.vim.git
+    path = bundle/gitv
+    url = https://github.com/gregsexton/gitv.git
 [submodule "bundle/golden-view"]
-	path = bundle/golden-view
-	url = https://github.com/zhaocai/GoldenView.Vim
+    path = bundle/golden-view
+    url = https://github.com/zhaocai/GoldenView.Vim
+    ignore = dirty
 [submodule "bundle/vim-expand-region"]
-	path = bundle/vim-expand-region
-	url = https://github.com/terryma/vim-expand-region
+    path = bundle/vim-expand-region
+    url = https://github.com/terryma/vim-expand-region
+    ignore = dirty
 [submodule "bundle/vim-sneak"]
-	path = bundle/vim-sneak
-	url = https://github.com/justinmk/vim-sneak
+    path = bundle/vim-sneak
+    url = https://github.com/justinmk/vim-sneak
 [submodule "bundle/vimproc"]
-	path = bundle/vimproc
-	url = https://github.com/Shougo/vimproc.vim
+    path = bundle/vimproc
+    url = https://github.com/Shougo/vimproc.vim
+[submodule "bundle/base16"]
+    path = bundle/base16
+    url = git://github.com/chriskempson/base16-vim.git
