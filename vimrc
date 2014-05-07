@@ -342,6 +342,12 @@ autocmd InsertLeave * if pumvisible() == 0|silent! pclose|endif
 " Jump to last known position in file
 :au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+" Use ag instead of grep, if available
+if executable("ag")
+    set grepprg=ag\ --nogroup\ --nocolor
+    let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
+
 """"""""""""""""""""""""""""""""""""""""""""""
 " Keybinds
 """"""""""""""""""""""""""""""""""""""""""""""
