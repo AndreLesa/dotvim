@@ -225,17 +225,6 @@ vnoremap <space> <C-f>
 vnoremap <s-space> <C-b>
 vnoremap <backspace> <C-b>
 
-" Split window
-nmap <leader>swh :topleft  vnew<cr>
-nmap <leader>swl :botright vnew<cr>
-nmap <leader>swk :topleft  new<cr>
-nmap <leader>swj :botright new<cr>
-" Split buffer
-nmap <leader>sbh :leftabove  vnew<cr>
-nmap <leader>sbl :rightbelow vnew<cr>
-nmap <leader>sbk :leftabove  new<cr>
-nmap <leader>sbj :rightbelow new<cr>
-
 " More speed!
 inoremap jj <esc>
 cnoremap jj <c-c><esc>
@@ -258,15 +247,26 @@ nnoremap <leader>p "+gP<cr>
 " Clear highlight from search
 nnoremap <return> :silent noh<cr>
 
+" Split window
+nnoremap <leader>swh :topleft  vnew<cr>
+nnoremap <leader>swl :botright vnew<cr>
+nnoremap <leader>swk :topleft  new<cr>
+nnoremap <leader>swj :botright new<cr>
+" Split buffer
+nnoremap <leader>sbh :leftabove  vnew<cr>
+nnoremap <leader>sbl :rightbelow vnew<cr>
+nnoremap <leader>sbk :leftabove  new<cr>
+nnoremap <leader>sbj :rightbelow new<cr>
+
+" Split window
+nnoremap <leader>2 :silent sp<cr>
+nnoremap <leader>3 :silent vsp<cr>
+
 " Close other windows
 nnoremap <leader>1 <c-w>o
-
-" Split window and switch to it
-nnoremap <leader>2 <c-w>s<c-w>j
-nnoremap <leader>3 <c-w>v<c-w>l
-
 " Close current window
 nnoremap <leader>4 <c-w>c
+nnoremap <leader>0 <c-w>c
 
 " Easier navigation between split windows
 nnoremap <c-j> <c-w>j
