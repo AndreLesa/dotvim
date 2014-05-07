@@ -125,3 +125,6 @@
 [submodule "bundle/base16"]
     path = bundle/base16
     url = git://github.com/chriskempson/base16-vim.git
+[submodule "bundle/vim-startify"]
+	path = bundle/vim-startify
+	url = https://github.com/mhinz/vim-startify
