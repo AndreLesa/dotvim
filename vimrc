@@ -443,15 +443,20 @@ let g:airline_enable_syntastic=1
 " Vim-startify
 " Automatically save session
 let g:startify_session_persistence = 1
+let g:startify_session_autoload    = 1
 " Switch to VCS (git, svn, bzr) project root when opening file from project
 let g:startify_change_to_vcs_root = 1
 " Don't change to file directory when opening file (This sounds to me like the
 " problematic autocmd option - why is it enabled by default?)
-let g:startify_change_to_dir = 0
+" let g:startify_change_to_dir = 0
+
 " Fix NERDTree and CtrlP opening a split from startify buffer
 autocmd FileType startify setlocal buftype=
 " Fix session autoloading
 let NERDTreeHijackNetrw = 0
+
+" Allow opening session on smaller or larger display
+set sessionoptions+=resize
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Python virtual env
