@@ -448,6 +448,10 @@ let g:startify_change_to_vcs_root = 1
 " Don't change to file directory when opening file (This sounds to me like the
 " problematic autocmd option - why is it enabled by default?)
 let g:startify_change_to_dir = 0
+" Fix NERDTree and CtrlP opening a split from startify buffer
+autocmd FileType startify setlocal buftype=
+" Fix session autoloading
+let NERDTreeHijackNetrw = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""
 " Python virtual env
