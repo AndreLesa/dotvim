@@ -438,6 +438,9 @@ let g:syntastic_python_checkers=['flake8']
 let g:syntastic_auto_loc_list=2
 let g:syntastic_always_populate_loc_list=0
 
+" Ignore HTML proprietary attribute errors
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute "]
+
 " Vim airline
 let g:airline_enable_branch=1
 let g:airline_branch_empty_message=''
