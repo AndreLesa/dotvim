@@ -58,6 +58,9 @@ runtime bundle/vim-pathogen/autoload/pathogen.vim " Source pathogen plugin
 " Temporarily disabled plugins
 let g:pathogen_disabled = []
 
+" GoldenView doesn't play nice with vim session loading
+call add(g:pathogen_disabled, 'golden-view')
+
 " Initialize pathogen
 call pathogen#infect() " Pathogen - do magic by setting up runtime paths
 call pathogen#helptags() " Pathogen - generate help tags
